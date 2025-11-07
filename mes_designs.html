@@ -1,0 +1,1429 @@
+<style type="text/css">
+    /* Reset et Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-light);
+    background: var(--dark-bg);
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Navigation */
+.navbar {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.nav-logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: #007bff;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.catalog-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: #ffd700;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-shape {
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.shape-1 {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    left: 10%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 20%;
+    animation: float 7s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Filtres */
+.catalog-filters {
+    padding: 3rem 0;
+    background: #f8f9fa;
+}
+
+.filter-section {
+    margin-bottom: 2rem;
+}
+
+.filter-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.filter-buttons,
+.tool-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn,
+.tool-btn {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-btn.active,
+.tool-btn.active,
+.filter-btn:hover,
+.tool-btn:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Search */
+.search-section {
+    margin-top: 2rem;
+}
+
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.search-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
+
+/* Grille Designs */
+.designs-catalog {
+    padding: 3rem 0;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.design-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.design-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.design-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.design-image img,
+.video-container video {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.video-container {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.design-card:hover .design-image img,
+.design-card:hover .video-container video {
+    transform: scale(1.05);
+}
+
+.design-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.design-card:hover .design-overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+.overlay-content h4 {
+    margin-bottom: 0.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #007bff;
+}
+
+.design-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.ui-badge { background: #007bff; }
+.branding-badge { background: #28a745; }
+.motion-badge { background: #dc3545; }
+.print-badge { background: #ffc107; color: #333; }
+.illustration-badge { background: #6f42c1; }
+
+.design-info {
+    padding: 1.5rem;
+}
+
+.design-info h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.design-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Load More */
+.load-more-section {
+    text-align: center;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-load-more {
+    background: #007bff;
+    color: white;
+}
+
+.btn-load-more:hover {
+    background: #0056b3;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-loader {
+    display: none;
+}
+
+.loading .btn-text {
+    display: none;
+}
+
+.loading .btn-loader {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.loader-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.loader-dot:nth-child(1) { animation-delay: -0.32s; }
+.loader-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* Modal */
+.design-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+}
+
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 1.5rem;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+}
+
+.lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+}
+
+.lightbox-close,
+.lightbox-nav {
+    position: absolute;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.lightbox-prev {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* CTA */
+.catalog-cta {
+    background: #f8f9fa;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.cta-content h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.cta-content p {
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    padding: 2rem 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-stats {
+        gap: 2rem;
+    }
+
+    .stat h3 {
+        font-size: 2rem;
+    }
+
+    .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-buttons,
+    .tool-filters {
+        justify-content: center;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .filter-btn,
+    .tool-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .design-info {
+        padding: 1rem;
+    }
+
+    .modal-container {
+        width: 95%;
+    }
+}
+
+/* Modal Design Content */
+.modal-design-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.design-gallery {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.gallery-item {
+    display: none;
+    text-align: center;
+}
+
+.gallery-item.active {
+    display: block;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-prev,
+.gallery-next {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.gallery-prev:hover,
+.gallery-next:hover {
+    background: #0056b3;
+}
+
+.gallery-indicators {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.indicator.active {
+    background: #007bff;
+}
+
+/* Design Details */
+.design-details {
+    padding: 0 1rem 2rem;
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+}
+
+.detail-section h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.detail-item strong {
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.features-list li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .gallery-item img {
+        max-height: 300px;
+    }
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Designs - Isaac Dev</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Dizolele Isaac</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="index.html#about" class="nav-link">À propos</a>
+                <a href="index.html#skills" class="nav-link">Compétences</a>
+                <a href="designs.html" class="nav-link active">Catalogue Designs</a>
+                <a href="index.html#sites" class="nav-link">Sites Web</a>
+                <a href="index.html#cv" class="nav-link">CV</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Catalogue -->
+    <section class="catalog-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Catalogue de <span class="highlight">Designs</span></h1>
+                <p class="hero-subtitle">Découvrez l'étendue de ma créativité à travers ces réalisations</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Designs Créés</p>
+                    </div>
+                    <div class="stat">
+                        <h3>25+</h3>
+                        <p>Clients Satisfaits</p>
+                    </div>
+                    <div class="stat">
+                        <h3>3+</h3>
+                        <p>Années d'Expérience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Filtres Avancés -->
+    <section class="catalog-filters">
+        <div class="container">
+            <div class="filter-section">
+                <h3>Filtrer par Catégorie</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-tools"></i> Tous
+                    </button>
+                    <button class="filter-btn" data-filter="ui-ux">
+                        <i class="fas fa-mobile-alt"></i> UI/UX
+                    </button>
+                    <button class="filter-btn" data-filter="branding">
+                        <i class="fas fa-palette"></i> Branding
+                    </button>
+                    <button class="filter-btn" data-filter="print">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button class="filter-btn" data-filter="motion">
+                        <i class="fas fa-film"></i> Motion
+                    </button>
+                    <button class="filter-btn" data-filter="illustration">
+                        <i class="fas fa-pencil-alt"></i> Illustration
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Filtrer par Outil</h3>
+                <div class="tool-filters">
+                    <button class="tool-btn active" data-tool="all">
+                        <i class="fas fa-tools"></i> Tous
+                    </button>
+                    <button class="tool-btn" data-tool="figma">
+                        <i class="fab fa-figma"></i> Figma
+                    </button>
+                    <button class="tool-btn" data-tool="photoshop">
+                        <i class="fas fa-pen-fancy"></i> Photoshop
+                    </button>
+                    <button class="tool-btn" data-tool="illustrator">
+                        <i class="fas fa-pen-nib"></i> Illustrator
+                    </button>
+                    <button class="tool-btn" data-tool="after-effects">
+                        <i class="fas fa-film"></i> After Effects
+                    </button>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="designSearch" placeholder="Rechercher un design...">
+                    <button class="search-clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grille de Designs Animée -->
+    <section class="designs-catalog">
+        <div class="container">
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Design 1 - UI/UX -->
+                <div class="design-item" data-category="ui-ux" data-tool="figma" data-tags="mobile app dashboard ui">
+                    <div class="design-card">
+                        <div class="design-image">
+                            <img src="assets/images/a7.png." alt="App Mobile Banking">
+                            <div class="design-overlay">
+                                <div class="overlay-content">
+                                    <h4>App Mobile Desktop</h4>
+                                    <p>Interface utilisateur moderne pour application Desktop</p>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn" data-design="banking-app">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn zoom-btn">
+                                            <i class="fas fa-search-plus"></i>
+                                        </button>
+                                        <button class="action-btn like-btn">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="design-badge ui-badge">UI/UX</div>
+                        </div>
+                        <div class="design-info">
+                            <h3>App Mobile Desktop</h3>
+                            <p>Design d'application des gestion</p>
+                            <div class="design-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-calendar"></i> 2025
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> 2 semaines
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design 2 - Branding -->
+                <div class="design-item" data-category="branding" data-tool="illustrator" data-tags="logo branding identity">
+                    <div class="design-card">
+                        <div class="design-image">
+                            <img src="assets/images/a12.png" alt="Identité Visuelle TechStart">
+                            <div class="design-overlay">
+                                <div class="overlay-content">
+                                    <h4>TechStart Branding</h4>
+                                    <p>Identité visuelle complète pour Association</p>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn" data-design="techstart-branding">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn zoom-btn">
+                                            <i class="fas fa-search-plus"></i>
+                                        </button>
+                                        <button class="action-btn like-btn">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="design-badge branding-badge">Branding</div>
+                        </div>
+                        <div class="design-info">
+                            <h3>TechStart Branding</h3>
+                            <p>Identité visuelle startup technologie</p>
+                            <div class="design-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-calendar"></i> 2025
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> 3 semaines
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design 3 - Motion -->
+                <div class="design-item" data-category="motion" data-tool="after-effects" data-tags="animation video promotion">
+                    <div class="design-card">
+                        <div class="design-image">
+                            <div class="video-container">
+                                <video muted loop poster="assets/images/a5.png">
+                                    <source src="assets/videos/v1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="design-overlay">
+                                <div class="overlay-content">
+                                    <h4>Animation Produit</h4>
+                                    <p>Vidéo promotionnelle pour lancement de formation</p>
+                                    <div class="action-buttons">
+                                        <button class="action-btn play-btn">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <button class="action-btn view-btn" data-design="motion-product">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn like-btn">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="design-badge motion-badge">Motion</div>
+                        </div>
+                        <div class="design-info">
+                            <h3>Animation Produit</h3>
+                            <p>Vidéo motion design promotionnelle</p>
+                            <div class="design-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-calendar"></i> 2024
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> 1 semaine
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chargement Plus -->
+            <div class="load-more-section">
+                <button class="btn btn-load-more" id="loadMore">
+                    <span class="btn-text">Charger Plus de Designs</span>
+                    <div class="btn-loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Détail Design -->
+    <div id="designDetailModal" class="design-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle">Détail du Design</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content" id="modalContent">
+                <!-- Contenu dynamique -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="catalog-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Inspiré par ces designs ?</h2>
+                <p>Travaillons ensemble pour créer quelque chose d'extraordinaire</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact-design" class="btn btn-primary">
+                        <i class="fas fa-pencil-alt"></i> Commander un Design
+                    </a>
+                    <a href="index.html#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Me Contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Dizolele Isaac. Tous droits réservés.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Dizolele123" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation mobile
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // Fermer le menu en cliquant sur un lien
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Gestion du modal de détail design
+        const designDetailModal = document.getElementById('designDetailModal');
+        const modalContent = document.getElementById('modalContent');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalClose = document.getElementById('modalClose');
+
+        // Données des designs
+        const designData = {
+            'banking-app': {
+                title: 'App Mobile Banking',
+                category: 'UI/UX',
+                tools: ['Figma', 'Adobe XD'],
+                duration: '2 semaines',
+                year: '2024',
+                description: 'Design complet d\'une application bancaire mobile moderne avec focus sur l\'expérience utilisateur et la sécurité.',
+                features: [
+                    'Interface intuitive pour les transactions',
+                    'Tableau de bord financier personnalisé',
+                    'Système de sécurité avancé',
+                    'Design responsive pour tous appareils'
+                ],
+                images: [
+                    'assets/images/a2.png',
+                    'assets/images/a3.png',
+                    'assets/images/a4.png'
+                ],
+                client: 'Banque XYZ',
+                challenge: 'Créer une application qui simplifie la gestion bancaire tout en maintenant un haut niveau de sécurité.'
+            },
+            'techstart-branding': {
+                title: 'TechStart Branding',
+                category: 'Branding',
+                tools: ['Illustrator', 'Photoshop'],
+                duration: '3 semaines',
+                year: '2024',
+                description: 'Identité visuelle complète pour une startup technologique innovante.',
+                features: [
+                    'Logo et logotype',
+                    'Guide de style complet',
+                    'Papeterie corporate',
+                    'Design des réseaux sociaux'
+                ],
+                images: [
+                    'assets/images/a8.jpg',
+                    'assets/images/a10.jpg'
+                ],
+                client: 'TechStart Inc.',
+                challenge: 'Établir une identité forte qui reflète l\'innovation et la fiabilité.'
+            },
+            'motion-product': {
+                title: 'Animation Produit',
+                category: 'Motion',
+                tools: ['After Effects', 'Premiere Pro'],
+                duration: '1 semaine',
+                year: '2024',
+                description: 'Vidéo motion design promotionnelle pour le lancement d\'une formation en ligne.',
+                features: [
+                    'Animation 2D vectorielle',
+                    'Sound design intégré',
+                    'Format optimisé pour les réseaux sociaux',
+                    'Storyboard professionnel'
+                ],
+                images: [
+                    'assets/images/a5.png',
+                    'assets/images/a9.jpg'
+                ],
+                client: 'Formation Pro',
+                challenge: 'Créer une animation engageante qui explique clairement les bénéfices de la formation.'
+            }
+        };
+
+        // Ouvrir le modal avec les détails du design
+        function openDesignModal(designId) {
+            const design = designData[designId];
+            
+            if (!design) {
+                console.error('Design non trouvé:', designId);
+                return;
+            }
+
+            // Mettre à jour le titre
+            modalTitle.textContent = design.title;
+
+            // Générer le contenu dynamique
+            modalContent.innerHTML = `
+                <div class="modal-design-content">
+                    <!-- Galerie d'images -->
+                    <div class="design-gallery">
+                        ${design.images.map((image, index) => `
+                            <div class="gallery-item ${index === 0 ? 'active' : ''}">
+                                <img src="${image}" alt="${design.title} - Vue ${index + 1}" style="width:100%;">
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Contrôles de galerie -->
+                    <div class="gallery-controls" style="display:flex; justify-content:center; align-items:center; gap:1rem; margin:1rem 0;">
+                        <button class="gallery-prev" style="background:#667eea; color:white; border:none; padding:0.5rem; border-radius:5px; cursor:pointer;">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="gallery-indicators" style="display:flex; gap:0.5rem;">
+                            ${design.images.map((_, index) => `
+                                <span class="indicator ${index === 0 ? 'active' : ''}" data-index="${index}" style="width:10px; height:10px; border-radius:50%; background:${index === 0 ? '#667eea' : '#ddd'}; cursor:pointer;"></span>
+                            `).join('')}
+                        </div>
+                        <button class="gallery-next" style="background:#667eea; color:white; border:none; padding:0.5rem; border-radius:5px; cursor:pointer;">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Informations du design -->
+                    <div class="design-details" style="padding:1.5rem;">
+                        <div class="detail-section" style="margin-bottom:1.5rem;">
+                            <h3 style="margin-bottom:0.5rem;">Description</h3>
+                            <p>${design.description}</p>
+                        </div>
+
+                        <div class="detail-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+                            <div class="detail-item">
+                                <strong>Catégorie:</strong>
+                                <span class="design-badge ${design.category.toLowerCase().replace('/', '-')}-badge" style="padding:0.25rem 0.5rem; border-radius:15px; color:white; font-size:0.8rem; margin-left:0.5rem;">
+                                    ${design.category}
+                                </span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Outils:</strong>
+                                <span>${design.tools.join(', ')}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Durée:</strong>
+                                <span>${design.duration}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Année:</strong>
+                                <span>${design.year}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Client:</strong>
+                                <span>${design.client}</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-section" style="margin-bottom:1.5rem;">
+                            <h3 style="margin-bottom:0.5rem;">Fonctionnalités</h3>
+                            <ul class="features-list" style="padding-left:1.5rem;">
+                                ${design.features.map(feature => `
+                                    <li>${feature}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="detail-section" style="margin-bottom:1.5rem;">
+                            <h3 style="margin-bottom:0.5rem;">Défi</h3>
+                            <p>${design.challenge}</p>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="modal-actions" style="display:flex; gap:1rem; flex-wrap:wrap;">
+                            <button class="btn btn-primary" style="background:#667eea; color:white; border:none; padding:0.75rem 1.5rem; border-radius:5px; cursor:pointer;">
+                                <i class="fas fa-download"></i> Télécharger les maquettes
+                            </button>
+                            <button class="btn btn-secondary" style="background:#6c757d; color:white; border:none; padding:0.75rem 1.5rem; border-radius:5px; cursor:pointer;">
+                                <i class="fas fa-envelope"></i> Demander un devis similaire
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Afficher le modal
+            designDetailModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            // Initialiser la galerie
+            initGallery();
+        }
+
+        // Initialiser la galerie d'images
+        function initGallery() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.querySelector('.gallery-prev');
+            const nextBtn = document.querySelector('.gallery-next');
+            
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                galleryItems.forEach(item => item.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                galleryItems[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentIndex = index;
+            }
+
+            prevBtn?.addEventListener('click', () => {
+                let newIndex = currentIndex - 1;
+                if (newIndex < 0) newIndex = galleryItems.length - 1;
+                showSlide(newIndex);
+            });
+
+            nextBtn?.addEventListener('click', () => {
+                let newIndex = currentIndex + 1;
+                if (newIndex >= galleryItems.length) newIndex = 0;
+                showSlide(newIndex);
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => showSlide(index));
+            });
+        }
+
+        // Fermer le modal
+        function closeDesignModal() {
+            designDetailModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Événements
+        if (modalClose) {
+            modalClose.addEventListener('click', closeDesignModal);
+        }
+        
+        if (designDetailModal) {
+            designDetailModal.addEventListener('click', (e) => {
+                if (e.target === designDetailModal) {
+                    closeDesignModal();
+                }
+            });
+        }
+
+        // Échap pour fermer
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && designDetailModal.style.display === 'block') {
+                closeDesignModal();
+            }
+        });
+
+        // Écouteurs pour les boutons "Voir"
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const designId = e.currentTarget.getAttribute('data-design');
+                    openDesignModal(designId);
+                });
+            });
+
+            // Filtrage des designs
+            const filterButtons = document.querySelectorAll('.filter-btn, .tool-btn');
+            const designItems = document.querySelectorAll('.design-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+
+                    // Logique de filtrage à implémenter
+                    console.log('Filtrage à implémenter');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
