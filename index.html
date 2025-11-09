@@ -327,7 +327,7 @@
                 <!-- Formulaire Général -->
                 <div class="contact-form" id="contact-general">
                     <h3>Message Général</h3>
-                    <form id="generalForm" method="POST" action="envoie_message.php">
+                    <form id="generalForm" method="POST" action="https://formspree.io/f/xqaloyyw">
                         <div class="form-group">
                             <input type="text" id="generalName" name="name" required>
                             <label for="generalName">Votre Nom</label>
@@ -335,6 +335,10 @@
                         <div class="form-group">
                             <input type="email" id="generalEmail" name="email" required>
                             <label for="generalEmail">Votre Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="phone" id="generalEmail" name="phone" required>
+                            <label for="generalEmail">Téléphone</label>
                         </div>
                         <div class="form-group">
                             <select id="generalService" name="service" required>
@@ -900,6 +904,7 @@ function initDesignFilters() {
 
 </script>
 </html>
+
 
 
 
