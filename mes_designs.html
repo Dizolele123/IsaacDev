@@ -1,4 +1,5 @@
 <style type="text/css">
+    /* Reset et Base */<style type="text/css">
     /* Reset et Base */
 * {
     margin: 0;
@@ -10,7 +11,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     color: var(--text-light);
-    background: var(--dark-bg);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     overflow-x: hidden;
 }
 
@@ -23,7 +24,8 @@ body {
 
 /* Navigation */
 .navbar {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
@@ -60,7 +62,7 @@ body {
 
 .nav-link.active,
 .nav-link:hover {
-    color: #007bff;
+    color: #667eea;
 }
 
 .nav-toggle {
@@ -169,7 +171,8 @@ body {
 /* Filtres */
 .catalog-filters {
     padding: 3rem 0;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.9);
+    backdrop-filter: blur(10px);
 }
 
 .filter-section {
@@ -205,9 +208,9 @@ body {
 .tool-btn.active,
 .filter-btn:hover,
 .tool-btn:hover {
-    background: #007bff;
+    background: #667eea;
     color: white;
-    border-color: #007bff;
+    border-color: #667eea;
 }
 
 /* Search */
@@ -250,6 +253,7 @@ body {
 /* Grille Designs */
 .designs-catalog {
     padding: 3rem 0;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .catalog-grid {
@@ -343,7 +347,7 @@ body {
 }
 
 .action-btn:hover {
-    background: #007bff;
+    background: #667eea;
 }
 
 .design-badge {
@@ -357,7 +361,7 @@ body {
     font-weight: bold;
 }
 
-.ui-badge { background: #007bff; }
+.ui-badge { background: #667eea; }
 .branding-badge { background: #28a745; }
 .motion-badge { background: #dc3545; }
 .print-badge { background: #ffc107; color: #333; }
@@ -405,16 +409,16 @@ body {
 }
 
 .btn-load-more {
-    background: #007bff;
+    background: #667eea;
     color: white;
 }
 
 .btn-load-more:hover {
-    background: #0056b3;
+    background: #5a6fd8;
 }
 
 .btn-primary {
-    background: #007bff;
+    background: #667eea;
     color: white;
 }
 
@@ -551,7 +555,8 @@ body {
 
 /* CTA */
 .catalog-cta {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.9);
+    backdrop-filter: blur(10px);
     padding: 4rem 0;
     text-align: center;
 }
@@ -575,7 +580,8 @@ body {
 
 /* Footer */
 .footer {
-    background: #333;
+    background: rgba(51, 51, 51, 0.9);
+    backdrop-filter: blur(10px);
     color: white;
     padding: 2rem 0;
 }
@@ -600,7 +606,7 @@ body {
 }
 
 .social-link:hover {
-    color: #007bff;
+    color: #667eea;
 }
 
 /* Responsive Design */
@@ -718,7 +724,7 @@ body {
 
 .gallery-prev,
 .gallery-next {
-    background: #007bff;
+    background: #667eea;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -729,7 +735,7 @@ body {
 
 .gallery-prev:hover,
 .gallery-next:hover {
-    background: #0056b3;
+    background: #5a6fd8;
 }
 
 .gallery-indicators {
@@ -747,7 +753,7 @@ body {
 }
 
 .indicator.active {
-    background: #007bff;
+    background: #667eea;
 }
 
 /* Design Details */
@@ -762,7 +768,7 @@ body {
 .detail-section h3 {
     color: #333;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #667eea;
     padding-bottom: 0.5rem;
 }
 
@@ -830,6 +836,7 @@ body {
         max-height: 300px;
     }
 }
+</style>
 </style>
 
 <!DOCTYPE html>
@@ -1168,69 +1175,70 @@ body {
         const modalClose = document.getElementById('modalClose');
 
         // Données des designs
-        const designData = {
-            'App-Web': {
-                title: 'App Web',
-                category: 'UI/UX',
-                tools: ['PHP', 'HTML/CSS'],
-                duration: '2 semaines',
-                year: '2025',
-                description: 'Design complet d\'une application web moderne avec focus sur l\'expérience utilisateur et commande en ligne.',
-                features: [
-                    'Interface intuitive pour le restau',
-                    'Tableau de bord pour administrateur',
-                    'Système de commande en ligne',
-                    'Design responsive pour tous appareils'
-                ],
-                images: [
-                    'a13.png',
-                    'a14.png',
-                    'a15.png'
-                ],
-                client: 'Le Bon Coin de chez Nous',
-                challenge: 'Créer une application qui simplifie la gestion des cocmmandes tout en maintenant un haut niveau de sécurité.'
-            },
-            'Tech-StartUp': {
-                title: 'Tech-StartUp ',
-                category: 'Web/Mobile',
-                tools: ['Javascript', 'Figma'],
-                duration: '3 semaines',
-                year: '2025',
-                description: 'Identité visuelle complète pour une startup Educative innovante.',
-                features: [
-                    'Logo et logotype',
-                    'Guide de style complet',
-                    'Inscription controler',
-                    'Design des réseaux sociaux'
-                ],
-                images: [
-                    'a16.png',
-                    'a8.jpg'
-                ],
-                client: 'PONA MALAMU',
-                challenge: 'Établir une identité Visuel forte qui reflète l\'innovation et l'éducation.'
-            },
-            'motion-product': {
-                title: 'Animation Produit',
-                category: 'Motion',
-                tools: ['Canva', 'Photoshop'],
-                duration: '1 semaine',
-                year: '2024',
-                description: 'Vidéo motion design promotionnelle pour le lancement d\'une formation en ligne.',
-                features: [
-                    'Animation 2D vectorielle',
-                    'Sound design intégré',
-                    'Format optimisé pour les réseaux sociaux',
-                    'Storyboard professionnel'
-                ],
-                images: [
-                    'a5.png',
-                    'a9.jpg'
-                ],
-                client: 'Formation Pro',
-                challenge: 'Créer une animation engageante qui explique clairement les bénéfices de la formation.'
-            }
-        };
+       // Données des designs
+const designData = {
+    'banking-app': {
+        title: 'App Mobile Banking',
+        category: 'UI/UX',
+        tools: ['Figma', 'Adobe XD'],
+        duration: '2 semaines',
+        year: '2025',
+        description: 'Design complet d\'une application bancaire moderne avec focus sur l\'expérience utilisateur et la sécurité.',
+        features: [
+            'Interface intuitive pour transactions',
+            'Tableau de bord financier personnalisé',
+            'Système de sécurité biométrique',
+            'Design responsive pour tous appareils'
+        ],
+        images: [
+            'a2.png',
+            'a3.png',
+            'a4.png'
+        ],
+        client: 'Banque Digitale',
+        challenge: 'Créer une application qui simplifie la banque tout en maintenant un haut niveau de sécurité.'
+    },
+    'techstart-branding': {
+        title: 'TechStart Branding',
+        category: 'Branding',
+        tools: ['Illustrator', 'Photoshop'],
+        duration: '3 semaines',
+        year: '2025',
+        description: 'Identité visuelle complète pour une startup technologique innovante.',
+        features: [
+            'Logo et logotype',
+            'Guide de style complet',
+            'Cartes de visite et en-têtes',
+            'Design des réseaux sociaux'
+        ],
+        images: [
+            'a12.png',
+            'a8.jpg'
+        ],
+        client: 'TechStart Inc.',
+        challenge: 'Établir une identité forte qui reflète l\'innovation et la fiabilité.'
+    },
+    'motion-product': {
+        title: 'Animation Produit',
+        category: 'Motion',
+        tools: ['After Effects', 'Premiere Pro'],
+        duration: '1 semaine',
+        year: '2024',
+        description: 'Vidéo motion design promotionnelle pour le lancement d\'un nouveau produit tech.',
+        features: [
+            'Animation 2D vectorielle',
+            'Sound design intégré',
+            'Format optimisé pour les réseaux sociaux',
+            'Storyboard professionnel'
+        ],
+        images: [
+            'a5.png',
+            'a9.jpg'
+        ],
+        client: 'TechProduct Corp',
+        challenge: 'Créer une animation engageante qui explique clairement les bénéfices du produit.'
+    }
+};
 
         // Ouvrir le modal avec les détails du design
         function openDesignModal(designId) {
@@ -1427,6 +1435,7 @@ body {
     </script>
 </body>
 </html>
+
 
 
 
