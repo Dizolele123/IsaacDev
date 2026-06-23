@@ -1,910 +1,548 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dizolele Isaac - Développeur Fullstack & Designer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dizolele Isaac - Développeur Fullstack & Designer</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Personnalisation des couleurs (remplace les defaults de Tailwind) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00a884',
+            'primary-dark': '#008f6f',
+            'primary-light': '#e0f5ef',
+            'gray-light': '#f5f7fa',
+            'gray-dark': '#6b7a8a',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Petits ajustements complémentaires (pas de changement de couleur) */
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .nav-link.active { color: #00a884; }
+    /* Effet de survol doux pour les cartes */
+    .card-hover:hover { transform: translateY(-4px); transition: 0.3s ease; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1); }
+    /* Barres de compétences animées */
+    .skill-bar { height: 6px; background: #e9edf2; border-radius: 8px; overflow: hidden; }
+    .skill-progress { height: 100%; background: #00a884; border-radius: 8px; width: 0; transition: width 1s ease; }
+    /* Filtres actifs */
+    .filter-btn.active { background: #00a884; color: white; }
+    /* Modal */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-content { max-width: 600px; width: 90%; background: white; border-radius: 16px; padding: 2rem; position: relative; }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">Dizolele Isaac</a>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Accueil</a>
-                <a href="#about" class="nav-link">À propos</a>
-                <a href="#skills" class="nav-link">Compétences</a>
-                <a href="mes_designs.html" class="nav-link">Designs</a>
-                <a href="#sites" class="nav-link">Sites Web</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                 <a href="#cv" class="nav-link">Mon CV</a>
 
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="text-xl font-bold">
+          <a href="#home">Dizolele <span class="text-primary">Isaac</span></a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">Bonjour, je suis <span class="highlight">DIZOLELE Isaac </span></h1>
-                    <p class="hero-subtitle">Développeur Fullstack & Designer Créatif</p>
-                    <p class="hero-description">Je crée des expériences digitales exceptionnelles qui marient code et design</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="window.location.href='mes_designs.html'">Voir mes Designs</button>
-                        <button href="#sites" class="btn btn-secondary" onclick="scrollToSection('sites')">Mes Projets Web</button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="image-container">
-                        <img src="a1.jpg" alt="Votre Photo" class="profile-photo">
-                        <div class="image-glow"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="scroll-arrow"></div>
-            </div>
+        <!-- Menu desktop -->
+        <div class="hidden md:flex space-x-8 text-sm font-medium">
+          <a href="#home" class="hover:text-primary transition">Accueil</a>
+          <a href="#about" class="hover:text-primary transition">À propos</a>
+          <a href="#skills" class="hover:text-primary transition">Compétences</a>
+          <a href="mes_designs.html" class="hover:text-primary transition">Designs</a>
+          <a href="#sites" class="hover:text-primary transition">Sites Web</a>
+          <a href="#contact" class="hover:text-primary transition">Contact</a>
+          <a href="#cv" class="hover:text-primary transition">Mon CV</a>
         </div>
-    </section>
-
-    <!-- À propos -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">À Propos de Moi</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Passionné par le développement web et le design, je crée des solutions digitales qui allient performance technique et esthétique raffinée.</p>
-                    <p>Avec une expertise en développement fullstack et un œil pour le design, je transforme vos idées en réalités digitales exceptionnelles à travers l'automatisation de vos operations en entreprise par la mise en place des systemes informatiques de gestion et des application pour votre identité visuel. </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>10+</h3>
-                            <p>Projets Réalisés</p>
-                        </div>
-                        <div class="stat">
-                            <h3>3</h3>
-                            <p>Années d'Expérience</p>
-                        </div>
-                        <div class="stat">
-                            <h3>100%</h3>
-                            <p>Clients Satisfaits</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Compétences -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Mes Compétences</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-level="90">
-                            <span>HTML/CSS</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="85">
-                            <span>JavaScript</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="80">
-                            <span>Figma</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-level="75">
-                            <span>PHP</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="70">
-                            <span>Javascript</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="65">
-                            <span>Base de données</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Design</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-level="85">
-                            <span>Adobe Photoshp</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="80">
-                            <span>Canva</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                        <div class="skill-item" data-level="75">
-                            <span>Figma</span>
-                            <div class="skill-bar"><div class="skill-progress"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Catalogue Designs -->
-    <section id="designs" class="designs">
-        <div class="container">
-            <h2 class="section-title">Mon Catalogue de Designs</h2>
-            <p class="section-subtitle">Découvrez mes créations graphiques et designs d'interface</p>
-            
-            <div class="design-filters">
-                <button id="designId" class="filter-btn active" data-filter="all" onclick="openModal('design1')">Tous</button>
-                <button id="designId"class="filter-btn" data-filter="ui" onclick="openModal('design2')">UI/UX</button>
-                <button id="designId"class="filter-btn" data-filter="graphic" onclick="openModal('design3')">Graphique</button>
-                <button id="designId"class="filter-btn" data-filter="branding" onclick="openModal('design4')">Branding</button>
-            </div>
-
-            <div class="designs-grid">
-                <div class="design-card" data-category="ui">
-                    <div class="design-image">
-                        <img src="a4.png" alt="Design UI/UX 1">
-                        <div class="design-overlay">
-                            <button class="view-btn" onclick="openModal('design1')">Voir plus</button>
-                        </div>
-                    </div>
-                    <div class="design-info">
-                        <h3>Application de gestion centre </h3>
-                        <p>php - HTML5/CSS3</p>
-                    </div>
-                </div>
-
-                <div class="design-card" data-category="graphic">
-                    <div class="design-image">
-                        <img src="a2.png" alt="Design Graphique 1">
-                        <div class="design-overlay">
-                            <button class="view-btn" onclick="openModal('design2')">Voir plus</button>
-                        </div>
-                    </div>
-                    <div class="design-info">
-                        <h3>Identité Visuel restaurant</h3>
-                        <p>en cours ...</p>
-                    </div>
-                </div>
-
-                <div class="design-card" data-category="branding">
-                    <div class="design-image">
-                        <img src="a3.png" alt="Branding 1">
-                        <div class="design-overlay">
-                            <button class="view-btn" onclick="openModal('design3')">Voir plus</button>
-                        </div>
-                    </div>
-                    <div class="design-info">
-                        <h3>Site Institut 2i</h3>
-                        <p>en cours ... </p>
-                    </div>
-                </div>
-
-                <div class="design-card" data-category="ui">
-                    <div class="design-image">
-                        <img src="a5.jpg" alt="Design UI/UX 2">
-                        <div class="design-overlay">
-                            <button class="view-btn" onclick="openModal('design4')">Voir plus</button>
-                        </div>
-                    </div>
-                    <div class="design-info">
-                        <h3>Logo Pro</h3>
-                        <p>Design Graphic</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="design-cta">
-                <h3>Intéressé par un design personnalisé ?</h3>
-                <button class="btn btn-primary" > <a href="#contact-design">Commander un Design<a></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Catalogue Sites Web -->
-    <section id="sites" class="sites">
-        <div class="container">
-            <h2 class="section-title">Mes Projets Web</h2>
-            <p class="section-subtitle">Découvrez mes réalisations de sites web et applications</p>
-
-            <div class="sites-grid">
-                <div class="site-card">
-                    <div class="site-image">
-                        <img src="a2.png" alt="Projet Web 1">
-                        <div class="site-overlay">
-                            <div class="site-links">
-                                <a href="https://dizolele123.github.io/Le-Bon-Coin-de-chez-Nous/" class="site-link">Voir le site</a>
-                                <a href="#" class="site-link">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="site-info">
-                        <h3>Site Restaurant</h3>
-                        <p>Gestion commande en ligne </p>
-                        <div class="site-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="site-card">
-                    <div class="site-image">
-                        <img src="a3.png" alt="Projet Web 2">
-                        <div class="site-overlay">
-                            <div class="site-links">
-                                <a href="#" class="site-link">Voir le site</a>
-                                <a href="#" class="site-link">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="site-info">
-                        <h3>Site Institut 2i</h3>
-                        <p>Identité visuel + inscription en ligne</p>
-                        <div class="site-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="site-card">
-                    <div class="site-image">
-                        <img src="a4.png" alt="Projet Web 3">
-                        <div class="site-overlay">
-                            <div class="site-links">
-                                <a href="#" class="site-link">Voir le site</a>
-                                <a href="#" class="site-link">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="site-info">
-                        <h3>Application Desktop </h3>
-                        <p>Application de gestion centre</p>
-                        <div class="site-tech">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JAVASCRIPT</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contactez-moi</h2>
-            <p class="section-subtitle">Discutons de votre prochain projet</p>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>isaacdizolelenkounga@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Téléphone</h3>
-                            <p>+242 06 490 59 08</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Localisation</h3>
-                            <p>Brazzaville, Mfilou</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Formulaire Général -->
-                <div class="contact-form" id="contact-general">
-                    <h3>Message Général</h3>
-                    <form id="generalForm" method="POST" action="https://formspree.io/f/xqaloyyw">
-                        <div class="form-group">
-                            <input type="text" id="generalName" name="name" required>
-                            <label for="generalName">Votre Nom</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="generalEmail" name="email" required>
-                            <label for="generalEmail">Votre Email</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="phone" id="generalEmail" name="phone" required>
-                            <label for="generalEmail">Téléphone</label>
-                        </div>
-                        <div class="form-group">
-                            <select id="generalService" name="service" required>
-                                <option value=""></option>
-                                <option value="developpement">Développement Web</option>
-                                <option value="design">Design</option>
-                                <option value="consultation">Consultation</option>
-                            </select>
-                            <label for="generalService">Type de Service</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="generalMessage" name="message" rows="5" required></textarea>
-                            <label for="generalMessage">Votre Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Envoyer le Message</button>
-                    </form>
-                </div>
-
-                <!-- Formulaire Design -->
-                <div class="contact-form" id="contact-design">
-                    <h3>Commande de Design</h3>
-                    <form id="designForm" method="POST" action="https://formspree.io/f/xqaloyyw">
-                        <div class="form-group">
-                            <input type="text" id="designName" name="name" required>
-                            <label for="designName">Votre Nom</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="designEmail" name="email" required>
-                            <label for="designEmail">Votre Email</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="phone" id="designEmail" name="phone" required>
-                            <label for="designEmail">Téléphone</label>
-                        </div>
-                        <div class="form-group">
-                            <select id="designType" name="designType" required>
-                                <option value=""></option>
-                                <option value="logo">Logo</option>
-                                <option value="ui">Fyers</option>
-                                <option value="branding">Identité Visuelle</option>
-                                <option value="print">Design Affiche</option>
-                                <option value="autre">Autre</option>
-                            </select>
-                            <label for="designType">Type de Design</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="designBrief" name="brief" rows="5" required placeholder="Décrivez votre projet, vos inspirations, vos contraintes..."></textarea>
-                            <label for="designBrief">Brief Créatif</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" id="designInspiration" name="inspiration" accept="image/*,.pdf">
-                            <label for="designInspiration" class="file-label">Fichiers d'inspiration (optionnel)</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Demander un Devis</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section CV -->
-    <section id="cv" class="cv">
-        <div class="container">
-            <h2 class="section-title">Mon Curriculum Vitae</h2>
-            <p class="section-subtitle">Téléchargez mon CV complet ou consultez-le en ligne</p>
-            
-            <div class="cv-actions">
-                <button class="btn btn-primary" onclick="downloadCV()">
-                    <i class="fas fa-download"></i> Télécharger le CV (PDF)
-                </button>
-                <button class="btn btn-secondary" onclick="printCV()">
-                    <i class="fas fa-print"></i> Imprimer le CV
-                </button>
-            </div>
-
-            <div class="cv-container" id="cv-content">
-                <!-- En-tête du CV -->
-                <div class="cv-header">
-                    <div class="cv-photo">
-                        <img src="a11.jpg" alt="Votre Photo">
-                    </div>
-                    <div class="cv-personal">
-                        <h1>Dizolele Nkounga Isaac Rabbi</h1>
-                        <h2>Développeur Fullstack & Designer graphique</h2>
-                        <div class="cv-contact">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>isaacdizolelenkounga@</span>                                
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+ 242 06 490 59 08</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Brazzaville / Mfilou</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-globe"></i>
-                                <span>www.dizolele123.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cv-body">
-                    <!-- Colonne gauche -->
-                    <div class="cv-left">
-                        <!-- Expérience Professionnelle -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-briefcase"></i> Expérience Professionnelle</h3>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-date">2022 - Présent</div>
-                                    <div class="timeline-content">
-                                        <h4>Développeur Fullstack </h4>
-                                        <span class="company">Tech Solutions Inc.</span>
-                                        <ul>
-                                            <li>Développement d'applications web/ Desktop avec PHP et Javascript</li>
-                                            <li>Conception et optimisation de bases de données</li>
-                                            <li>Encadrement d'une équipe de 3 développeurs</li>
-                                            <li>Encadreur en programmation Web  au centre EducationPlus</li>
-                                            <li>Amélioration des performances de 60%</li>
-                                            <li>Responsable de la Direction Marketing du centre NKM- Batiment</li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-date">2020 - 2022</div>
-                                    <div class="timeline-content">
-                                        <h4>Designer Graphique</h4>
-                                        <span class="company">Agence Digital Sabrina </span>
-                                        <ul>
-                                            <li>Conception d'interfaces utilisateur modernes</li>
-                                            <li>Création des maquettes publicitaire</li>
-                                            <li>Creation des flyers, affiche, ...</li>
-                                            <li>Design Moderne professionnel</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-date">2019 - 2020</div>
-                                    <div class="timeline-content">
-                                        <h4>Coach Englais</h4>
-                                        <span class="company">NECA</span>
-                                        <ul>
-                                            <li>Secretaire chargé de communication</li>
-                                            <li>Encadreur en langue anglaise</li>
-                                            <li>leader communautaire </li>
-                                            <li>Organisateur des evenements communautaires</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Formation -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-graduation-cap"></i> Formation</h3>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-date">2022 - present</div>
-                                    <div class="timeline-content">
-                                        <h4>Licence en Développement Web</h4>
-                                        <span class="company"> CFI-CIRAS</span>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-date">¨2022-2023</div>
-                                    <div class="timeline-content">
-                                        <h4>Formation en Design Pro</h4>
-                                        <span class="company">Ministere de la jeunnesse</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    <!-- Colonne droite -->
-                    <div class="cv-right">
-                        <!-- Compétences Techniques -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-code"></i> Compétences Techniques</h3>
-                            <div class="skills-list">
-                                <div class="skill-category">
-                                    <h4>Frontend</h4>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">JavaScript</span>
-                                        <span class="skill-tag">HTML5/CSS3</span>
-                                        <span class="skill-tag">Figma</span>
-                                    </div>
-                                </div>
-                                <div class="skill-category">
-                                    <h4>Backend</h4>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">Python en cours...</span>
-                                        <span class="skill-tag">PHP</span>
-                                        <span class="skill-tag">MySQL</span>
-                                        <span class="skill-tag">JavaScript</span>
-                                    </div>
-                                </div>
-                                <div class="skill-category">
-                                    <h4>Design</h4>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">Figma</span>
-                                        <span class="skill-tag">Canva</span>
-                                        <span class="skill-tag">Photoshop</span>
-                                    </div>
-                                </div>
-                                <div class="skill-category">
-                                    <h4>Outils & Méthodologies</h4>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">Visual Studio</span>
-                                        <span class="skill-tag">Sublime Text</span>
-                                        <span class="skill-tag">Plateforme Canva</span>
-                                        <span class="skill-tag">¨Plateforme Figma</span>
-                                        <span class="skill-tag">Adobe Photoshop</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Langues -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-language"></i> Langues</h3>
-                            <div class="languages">
-                                <div class="language-item">
-                                    <span>Français</span>
-                                    <div class="language-level">
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                    </div>
-                                </div>
-                                <div class="language-item">
-                                    <span>Anglais</span>
-                                    <div class="language-level">
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot"></div>
-                                    </div>
-                                </div>
-                                <div class="language-item">
-                                    <span>Kituba</span>
-                                    <div class="language-level">
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot active"></div>
-                                        <div class="level-dot"></div>
-                                        <div class="level-dot"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Certifications -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-award"></i> Certifications</h3>
-                            <div class="certifications">
-                                <div class="certification-item">
-                                    <h4>Certificat Leadership Communautaire</h4>
-                                    <span>YALI RLC - 2022</span>
-                                </div>
-                                <div class="certification-item">
-                                    <h4>Certificat Coach angais</h4>
-                                    <span>NECA- 2021</span>
-                                </div>
-                                <div class="certification-item">
-                                    <h4>Graphique Designe</h4>
-                                    <span>Ministere de la Jeunesse - 2023</span>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Centres d'intérêt -->
-                        <section class="cv-section">
-                            <h3><i class="fas fa-heart"></i> Centres d'intérêt</h3>
-                            <div class="interests">
-                                <div class="interest-item">
-                                    <i class="fas fa-paint-brush"></i>
-                                    <span>Design Graphique</span>
-                                </div>
-                                <div class="interest-item">
-                                    <i class="fas fa-music"></i>
-                                    <span>Musique Électronique</span>
-                                </div>
-                                <div class="interest-item">
-                                    <i class="fas fa-plane"></i>
-                                    <span>Voyages</span>
-                                </div>
-                                <div class="interest-item">
-                                    <i class="fas fa-gamepad"></i>
-                                    <span>Jeux Vidéo</span>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2025 Dizolele Isaac. Tous droits réservés.</p>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal Design -->
-    <div id="designModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modal-body">
-                     <!-- Contenu dynamique -->
-                     <script type="text/javascript">
-                     // Modal pour les designs
-
-function openModal(designId) {
-    const modal = document.getElementById('designModal');
-    const modalBody = document.getElementById('modal-body');
-    
-    // Contenu du modal basé sur le design
-    const designContent = {
-        design1: `
-            <h2>Affiche Moderne Pro</h2>
-            <div class="modal-image">
-                <img src="a8.jpg" width="520" height="250" alt="Application Mobile Modern">
-            </div>
-            <div class="modal-details">
-                <p><strong>Catégorie:</strong> UI/UX Design</p>
-                <p><strong>Année:</strong> 2024</p>
-                <p><strong>Description:</strong> Design d'affiche moderne et professionnel pour une experience optimisée.</p>
-                <p><strong>Outils:</strong> Photoshop</p>
-            </div>
-        `,
-        design2: `
-            <h2>Flyer Publicitaire</h2>
-            <div class="modal-image">
-                <img src="a9.jpg" width="520" height="250" alt="Poster Artistique">
-            </div>
-            <div class="modal-details">
-                <p><strong>Catégorie:</strong> Design Graphique</p>
-                <p><strong>Année:</strong> 2024</p>
-                <p><strong>Description:</strong> Flyer de haute qualite. Bon pour les publicités</p>
-                <p><strong>Outils:</strong> Plateforme Canva</p>
-            </div>
-        `,
-        design3: `
-            <h2>Identité Visuelle</h2>
-            <div class="modal-image">
-                <img src="a10.jpg" width="520" height="250" alt="Identité Visuelle">
-            </div>
-            <div class="modal-details">
-                <p><strong>Catégorie:</strong> Branding</p>
-                <p><strong>Année:</strong> 2024</p>
-                <p><strong>Description:</strong> Création complète d'identité visuelle incluant logo, palette de couleurs et guidelines.</p>
-                <p><strong>Outils:</strong> Photoshop</p>
-            </div>
-        `,
-        design4: `
-            <h2>Dashboard Analytics</h2>
-            <div class="modal-image">
-                <img src="a7.png" width="520" height="250" alt="Dashboard Analytics">
-            </div>
-            <div class="modal-details">
-                <p><strong>Catégorie:</strong> UI/UX Design</p>
-                <p><strong>Année:</strong> 2024</p>
-                <p><strong>Description:</strong> Dashboard analytique avec visualisation de données et interface administrateur.</p>
-                <p><strong>Outils:</strong> Figma</p>
-            </div>
-        `
-    };
-    
-    modalBody.innerHTML = designContent[designId] || '<p>Contenu non disponible</p>';
-    modal.style.display = 'block';
-    
-    // Empêcher le défilement du body
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    const modal = document.getElementById('designModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Fermer le modal en cliquant à l'extérieur
-window.addEventListener('click', (e) => {
-    const modal = document.getElementById('designModal');
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-                </script>
-           
-            </div>
-        </div>
+        <!-- Burger mobile -->
+        <button id="menu-btn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+      <!-- Menu mobile -->
+      <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2 text-sm font-medium">
+        <a href="#home" class="block hover:text-primary transition">Accueil</a>
+        <a href="#about" class="block hover:text-primary transition">À propos</a>
+        <a href="#skills" class="block hover:text-primary transition">Compétences</a>
+        <a href="mes_designs.html" class="block hover:text-primary transition">Designs</a>
+        <a href="#sites" class="block hover:text-primary transition">Sites Web</a>
+        <a href="#contact" class="block hover:text-primary transition">Contact</a>
+        <a href="#cv" class="block hover:text-primary transition">Mon CV</a>
+      </div>
     </div>
+  </nav>
 
+  <!-- ===== HERO ===== -->
+  <section id="home" class="pt-20 pb-16 bg-gradient-to-br from-white to-primary-light/30 min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col-reverse md:flex-row items-center gap-12">
+        <!-- Texte -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+            Bonjour, je suis <span class="text-primary">Dizolele Isaac</span>
+          </h1>
+          <p class="text-xl text-gray-600 mt-2 font-medium">Développeur Fullstack &amp; Designer Créatif</p>
+          <p class="text-gray-500 mt-4 max-w-lg mx-auto md:mx-0">
+            Je crée des expériences digitales exceptionnelles qui marient code et design.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
+            <button onclick="window.location.href='mes_designs.html'" class="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary-dark transition transform hover:-translate-y-1">
+              Voir mes Designs
+            </button>
+            <button onclick="document.getElementById('sites').scrollIntoView({behavior:'smooth'})" class="border-2 border-primary text-primary px-8 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition transform hover:-translate-y-1">
+              Mes Projets Web
+            </button>
+          </div>
+        </div>
+        <!-- Image -->
+        <div class="flex-shrink-0">
+          <div class="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl relative">
+            <img src="a1.jpg" alt="Dizolele Isaac" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-transparent pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Scroll indicator -->
+      <div class="flex flex-col items-center mt-12 text-gray-400 text-sm animate-bounce">
+        <span>Scroll</span>
+        <div class="w-5 h-5 border-r-2 border-b-2 border-gray-400 rotate-45 mt-1"></div>
+      </div>
+    </div>
+  </section>
 
-</body>
-   <!-- Ton script peut être à la fin du body -->
-<script>
-  // Fonction de notification simple (tu pourras la remplacer plus tard par une version stylée)
-  function showNotification(message, type) {
-      // Ici on utilise alert juste pour tester
-      alert(message);
-  }
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">À Propos de Moi</h2>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <div class="mt-12 max-w-4xl mx-auto text-center">
+        <p class="text-gray-600 text-lg leading-relaxed">
+          Passionné par le développement web et le design, je crée des solutions digitales qui allient performance technique et esthétique raffinée.
+        </p>
+        <p class="text-gray-600 text-lg leading-relaxed mt-4">
+          Avec une expertise en développement fullstack et un œil pour le design, je transforme vos idées en réalités digitales exceptionnelles à travers l'automatisation de vos opérations en entreprise par la mise en place de systèmes informatiques de gestion et d'applications pour votre identité visuelle.
+        </p>
+        <div class="flex flex-wrap justify-center gap-12 mt-10">
+          <div><span class="text-3xl font-bold text-primary">10+</span><p class="text-gray-500">Projets Réalisés</p></div>
+          <div><span class="text-3xl font-bold text-primary">3</span><p class="text-gray-500">Années d'Expérience</p></div>
+          <div><span class="text-3xl font-bold text-primary">100%</span><p class="text-gray-500">Clients Satisfaits</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Fonction de téléchargement du CV
-  function downloadCV() {
-      showNotification('Préparation du téléchargement du CV...', 'success');
-      
-      setTimeout(() => {
-          const link = document.createElement('a');
-          link.href = 'https://cvdesignr.com/p/690a8a806392c'; // Vérifie bien le nom et le dossier
-          link.download = 'https://cvdesignr.com/p/690a8a806392c';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-      }, 1500);
-  }
-</script>
-<script type="text/javascript">
-    function printCV() {
-    const cvContent = document.getElementById('cv-content');
-    const originalContents = document.body.innerHTML;
-    
-    // Créer une version imprimable
-    const printContents = cvContent.innerHTML;
-    
-    document.body.innerHTML = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>CV - Dizolele Isaac</title>
-            <style>
-                body { 
-                    font-family: Arial, sans-serif; 
-                    color: black; 
-                    background: white;
-                    padding: 20px;
-                }
-                .cv-container { 
-                    max-width: 1000px; 
-                    margin: 0 auto;
-                    background: white;
-                }
-                .cv-header {
-                    background: #f0f0f0 !important;
-                    color: black !important;
-                    padding: 2rem;
-                    margin-bottom: 2rem;
-                }
-                .section-title {
-                    color: #00a884 !important;
-                    -webkit-text-fill-color: #00a884 !important;
-                }
-                @media print {
-                    body { padding: 0; }
-                    .no-print { display: none !important; }
-                }
-            </style>
-        </head>
-        <body>
-            <div class="cv-container">${printContents}</div>
-            <div class="no-print" style="text-align: center; margin-top: 2rem;">
-                <button onclick="window.close()">Fermer</button>
-                <button onclick="window.print()">Imprimer</button>
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="py-20 bg-gray-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mes Compétences</h2>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Frontend -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-laptop-code text-primary"></i> Frontend</h3>
+          <div class="mt-4 space-y-4">
+            <div><div class="flex justify-between"><span>HTML/CSS</span><span class="text-sm text-gray-500">90%</span></div><div class="skill-bar"><div class="skill-progress" data-level="90"></div></div></div>
+            <div><div class="flex justify-between"><span>JavaScript</span><span class="text-sm text-gray-500">85%</span></div><div class="skill-bar"><div class="skill-progress" data-level="85"></div></div></div>
+            <div><div class="flex justify-between"><span>Figma</span><span class="text-sm text-gray-500">80%</span></div><div class="skill-bar"><div class="skill-progress" data-level="80"></div></div></div>
+          </div>
+        </div>
+        <!-- Backend -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-server text-primary"></i> Backend</h3>
+          <div class="mt-4 space-y-4">
+            <div><div class="flex justify-between"><span>PHP</span><span class="text-sm text-gray-500">75%</span></div><div class="skill-bar"><div class="skill-progress" data-level="75"></div></div></div>
+            <div><div class="flex justify-between"><span>JavaScript</span><span class="text-sm text-gray-500">70%</span></div><div class="skill-bar"><div class="skill-progress" data-level="70"></div></div></div>
+            <div><div class="flex justify-between"><span>Base de données</span><span class="text-sm text-gray-500">65%</span></div><div class="skill-bar"><div class="skill-progress" data-level="65"></div></div></div>
+          </div>
+        </div>
+        <!-- Design -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-pencil-ruler text-primary"></i> Design</h3>
+          <div class="mt-4 space-y-4">
+            <div><div class="flex justify-between"><span>Adobe Photoshop</span><span class="text-sm text-gray-500">85%</span></div><div class="skill-bar"><div class="skill-progress" data-level="85"></div></div></div>
+            <div><div class="flex justify-between"><span>Canva</span><span class="text-sm text-gray-500">80%</span></div><div class="skill-bar"><div class="skill-progress" data-level="80"></div></div></div>
+            <div><div class="flex justify-between"><span>Figma</span><span class="text-sm text-gray-500">75%</span></div><div class="skill-bar"><div class="skill-progress" data-level="75"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DESIGNS ===== -->
+  <section id="designs" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mon Catalogue de Designs</h2>
+      <p class="text-center text-gray-500 mt-2">Découvrez mes créations graphiques et designs d'interface</p>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <!-- Filtres -->
+      <div class="flex flex-wrap justify-center gap-3 mt-10">
+        <button class="filter-btn active px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="all">Tous</button>
+        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="ui">UI/UX</button>
+        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="graphic">Graphique</button>
+        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="branding">Branding</button>
+      </div>
+      <!-- Grille -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="ui">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a4.png" alt="Design UI/UX 1" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
+              <button onclick="openModal('design1')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
             </div>
-        </body>
-        </html>
-    `;
-    
-    window.print();
-    
-    // Restaurer le contenu original après l'impression
-    setTimeout(() => {
-        document.body.innerHTML = originalContents;
-        // Réinitialiser les event listeners si nécessaire
-        initTheme();
-        initDesignFilters();
-        initForms();
-        initScrollAnimations();
-        initScrollNavigation();
-    }, 500);
-}
-</script>
-<script type="text/javascript">
-    // Navigation mobile
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Application de gestion centre</h3>
+            <p class="text-sm text-gray-500">PHP - HTML5/CSS3</p>
+          </div>
+        </div>
+        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="graphic">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a2.png" alt="Design Graphique 1" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
+              <button onclick="openModal('design2')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Identité Visuelle restaurant</h3>
+            <p class="text-sm text-gray-500">en cours...</p>
+          </div>
+        </div>
+        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="branding">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a3.png" alt="Branding 1" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
+              <button onclick="openModal('design3')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Site Institut 2i</h3>
+            <p class="text-sm text-gray-500">en cours...</p>
+          </div>
+        </div>
+        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="ui">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a5.jpg" alt="Design UI/UX 2" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
+              <button onclick="openModal('design4')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Logo Pro</h3>
+            <p class="text-sm text-gray-500">Design Graphique</p>
+          </div>
+        </div>
+      </div>
+      <!-- CTA -->
+      <div class="mt-12 text-center bg-primary-light rounded-2xl p-8">
+        <h3 class="text-xl font-semibold">Intéressé par un design personnalisé ?</h3>
+        <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="mt-4 bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary-dark transition">
+          Commander un Design
+        </button>
+      </div>
+    </div>
+  </section>
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
-});
+  <!-- ===== SITES WEB ===== -->
+  <section id="sites" class="py-20 bg-gray-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mes Projets Web</h2>
+      <p class="text-center text-gray-500 mt-2">Découvrez mes réalisations de sites web et applications</p>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a2.png" alt="Projet Web 1" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
+              <a href="https://dizolele123.github.io/Le-Bon-Coin-de-chez-Nous/" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
+              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Site Restaurant</h3>
+            <p class="text-sm text-gray-500">Gestion commande en ligne</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">PHP</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS3</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a3.png" alt="Projet Web 2" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
+              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
+              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Site Institut 2i</h3>
+            <p class="text-sm text-gray-500">Identité visuelle + inscription en ligne</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">PHP</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS3</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="a4.png" alt="Projet Web 3" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
+              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
+              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold">Application Desktop</h3>
+            <p class="text-sm text-gray-500">Application de gestion centre</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS</span>
+              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-// Fermer le menu mobile en cliquant sur un lien
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">Contactez-moi</h2>
+      <p class="text-center text-gray-500 mt-2">Discutons de votre prochain projet</p>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Infos -->
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-envelope"></i></div>
+            <div><h3 class="font-semibold">Email</h3><p class="text-gray-500">isaacdizolelenkounga@gmail.com</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-phone"></i></div>
+            <div><h3 class="font-semibold">Téléphone</h3><p class="text-gray-500">+242 06 490 59 08</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-map-marker-alt"></i></div>
+            <div><h3 class="font-semibold">Localisation</h3><p class="text-gray-500">Brazzaville, Mfilou</p></div>
+          </div>
+        </div>
+        <!-- Formulaire -->
+        <div class="bg-gray-light p-6 rounded-2xl">
+          <h3 class="text-xl font-semibold mb-4">Message Général</h3>
+          <form method="POST" action="https://formspree.io/f/xqaloyyw">
+            <div class="space-y-4">
+              <input type="text" name="name" placeholder="Votre Nom" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
+              <input type="email" name="email" placeholder="Votre Email" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
+              <input type="tel" name="phone" placeholder="Téléphone" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
+              <select name="service" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition">
+                <option value="">Type de Service</option>
+                <option value="developpement">Développement Web</option>
+                <option value="design">Design</option>
+                <option value="consultation">Consultation</option>
+              </select>
+              <textarea name="message" rows="4" placeholder="Votre Message" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"></textarea>
+              <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition">Envoyer le Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CV ===== -->
+  <section id="cv" class="py-20 bg-gray-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mon Curriculum Vitae</h2>
+      <p class="text-center text-gray-500 mt-2">Téléchargez mon CV complet ou consultez-le en ligne</p>
+      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <button onclick="downloadCV()" class="bg-primary text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-primary-dark transition flex items-center gap-2"><i class="fas fa-download"></i> Télécharger le CV (PDF)</button>
+        <button onclick="printCV()" class="border-2 border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition flex items-center gap-2"><i class="fas fa-print"></i> Imprimer le CV</button>
+      </div>
+      <div class="mt-10 bg-white rounded-2xl shadow-sm p-6 md:p-10" id="cv-content">
+        <!-- En-tête -->
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 pb-6 border-b border-gray-200">
+          <img src="a11.jpg" alt="Photo" class="w-32 h-32 rounded-full object-cover border-4 border-primary-light" />
+          <div class="flex-1 text-center md:text-left">
+            <h1 class="text-2xl font-bold">Dizolele Nkounga Isaac Rabbi</h1>
+            <h2 class="text-lg text-gray-600">Développeur Fullstack &amp; Designer graphique</h2>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-2 text-sm text-gray-500">
+              <span><i class="fas fa-envelope text-primary mr-1"></i> isaacdizolelenkounga@gmail.com</span>
+              <span><i class="fas fa-phone text-primary mr-1"></i> +242 06 490 59 08</span>
+              <span><i class="fas fa-map-marker-alt text-primary mr-1"></i> Brazzaville / Mfilou</span>
+              <span><i class="fas fa-globe text-primary mr-1"></i> www.dizolele123.com</span>
+            </div>
+          </div>
+        </div>
+        <!-- Corps -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <!-- Colonne gauche (2/3) -->
+          <div class="md:col-span-2 space-y-6">
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-briefcase text-primary"></i> Expérience Professionnelle</h3>
+              <div class="space-y-4 mt-3">
+                <div><span class="font-bold text-primary">2022 - Présent</span><h4 class="font-semibold">Développeur Fullstack</h4><p class="text-sm text-gray-500">Tech Solutions Inc.</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Développement d'applications web/Desktop avec PHP et JavaScript</li><li>Conception et optimisation de bases de données</li><li>Encadrement d'une équipe de 3 développeurs</li><li>Encadreur en programmation Web au centre EducationPlus</li><li>Amélioration des performances de 60%</li><li>Responsable de la Direction Marketing du centre NKM-Bâtiment</li></ul></div>
+                <div><span class="font-bold text-primary">2020 - 2022</span><h4 class="font-semibold">Designer Graphique</h4><p class="text-sm text-gray-500">Agence Digital Sabrina</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Conception d'interfaces utilisateur modernes</li><li>Création des maquettes publicitaires</li><li>Création de flyers, affiches, ...</li><li>Design moderne professionnel</li></ul></div>
+                <div><span class="font-bold text-primary">2019 - 2020</span><h4 class="font-semibold">Coach Anglais</h4><p class="text-sm text-gray-500">NECA</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Secrétaire chargé de communication</li><li>Encadreur en langue anglaise</li><li>Leader communautaire</li><li>Organisateur d'événements communautaires</li></ul></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-graduation-cap text-primary"></i> Formation</h3>
+              <div class="space-y-2 mt-3">
+                <div><span class="font-bold text-primary">2022 - présent</span><h4 class="font-semibold">Licence en Développement Web</h4><p class="text-sm text-gray-500">CFI-CIRAS</p></div>
+                <div><span class="font-bold text-primary">2022 - 2023</span><h4 class="font-semibold">Formation en Design Pro</h4><p class="text-sm text-gray-500">Ministère de la Jeunesse</p></div>
+              </div>
+            </div>
+          </div>
+          <!-- Colonne droite (1/3) -->
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-code text-primary"></i> Compétences Techniques</h3>
+              <div class="mt-2 space-y-3">
+                <div><h4 class="font-medium">Frontend</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">JavaScript</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">HTML5/CSS3</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span></div></div>
+                <div><h4 class="font-medium">Backend</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Python (en cours)</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">PHP</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">MySQL</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">JavaScript</span></div></div>
+                <div><h4 class="font-medium">Design</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Canva</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Photoshop</span></div></div>
+                <div><h4 class="font-medium">Outils & Méthodologies</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Visual Studio</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Sublime Text</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Canva</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Photoshop</span></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-language text-primary"></i> Langues</h3>
+              <div class="space-y-2 mt-2">
+                <div><span class="font-medium">Français</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span></div></div>
+                <div><span class="font-medium">Anglais</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span></div></div>
+                <div><span class="font-medium">Kituba</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-award text-primary"></i> Certifications</h3>
+              <div class="mt-2 space-y-1 text-sm">
+                <div><span class="font-medium">Leadership Communautaire</span> - YALI RLC 2022</div>
+                <div><span class="font-medium">Coach Anglais</span> - NECA 2021</div>
+                <div><span class="font-medium">Graphique Designer</span> - Ministère Jeunesse 2023</div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-heart text-primary"></i> Centres d'intérêt</h3>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-paint-brush text-primary mr-1"></i> Design Graphique</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-music text-primary mr-1"></i> Musique Électronique</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-plane text-primary mr-1"></i> Voyages</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-gamepad text-primary mr-1"></i> Jeux Vidéo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p>&copy; 2025 Dizolele Isaac. Tous droits réservés.</p>
+      <div class="flex gap-4 text-lg">
+        <a href="#" class="hover:text-primary transition"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="hover:text-primary transition"><i class="fab fa-github"></i></a>
+        <a href="#" class="hover:text-primary transition"><i class="fab fa-dribbble"></i></a>
+        <a href="#" class="hover:text-primary transition"><i class="fab fa-behance"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div id="designModal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeModal()" class="absolute top-3 right-4 text-3xl text-gray-400 hover:text-gray-800">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Menu mobile
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     });
-});
-</script>
-<script type="text/javascript">
-    // Animation des barres de compétences
-function animateSkills() {
-    const skillItems = document.querySelectorAll('.skill-item');
-    
-    skillItems.forEach(item => {
-        const level = item.getAttribute('data-level');
-        const progressBar = item.querySelector('.skill-progress');
-        
-        setTimeout(() => {
-            progressBar.style.width = level + '%';
-        }, 500);
-    });
-}
 
-</script>
-<script type="text/javascript">
-    // Filtrage des designs
-function initDesignFilters() {
+    // Filtres designs
     const filterBtns = document.querySelectorAll('.filter-btn');
     const designCards = document.querySelectorAll('.design-card');
-    
     filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Retirer la classe active de tous les boutons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Ajouter la classe active au bouton cliqué
-            btn.classList.add('active');
-            
-            const filter = btn.getAttribute('data-filter');
-            
-            designCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.classList.add('show'), 50);
-                } else {
-                    card.classList.remove('show');
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        designCards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
         });
+      });
     });
-}
+    // Activer "Tous" par défaut
+    document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
 
-</script>
+    // Animation barres de compétences (Intersection Observer)
+    const progressBars = document.querySelectorAll('.skill-progress');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const level = bar.dataset.level;
+          setTimeout(() => { bar.style.width = level + '%'; }, 200);
+        }
+      });
+    }, { threshold: 0.5 });
+    progressBars.forEach(bar => observer.observe(bar));
+
+    // Modal
+    function openModal(id) {
+      const modal = document.getElementById('designModal');
+      const body = document.getElementById('modal-body');
+      const content = {
+        design1: `<h2 class="text-2xl font-bold">Affiche Moderne Pro</h2><img src="a8.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> UI/UX Design</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Design d'affiche moderne et professionnel.</p><p><strong>Outils:</strong> Photoshop</p>`,
+        design2: `<h2 class="text-2xl font-bold">Flyer Publicitaire</h2><img src="a9.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> Design Graphique</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Flyer de haute qualité pour publicités.</p><p><strong>Outils:</strong> Canva</p>`,
+        design3: `<h2 class="text-2xl font-bold">Identité Visuelle</h2><img src="a10.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> Branding</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Création complète d'identité visuelle.</p><p><strong>Outils:</strong> Photoshop</p>`,
+        design4: `<h2 class="text-2xl font-bold">Dashboard Analytics</h2><img src="a7.png" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> UI/UX Design</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Dashboard analytique avec visualisation de données.</p><p><strong>Outils:</strong> Figma</p>`
+      };
+      body.innerHTML = content[id] || '<p>Contenu non disponible</p>';
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('designModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    window.addEventListener('click', e => { if (e.target === document.getElementById('designModal')) closeModal(); });
+
+    // Téléchargement CV (simulé)
+    function downloadCV() {
+      alert('Téléchargement du CV en cours...');
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = 'https://cvdesignr.com/p/690a8a806392c';
+        a.download = 'CV_Dizolele_Isaac.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 500);
+    }
+
+    // Impression CV
+    function printCV() {
+      const content = document.getElementById('cv-content').innerHTML;
+      const win = window.open('', '_blank');
+      win.document.write(`<!DOCTYPE html><html><head><title>CV Dizolele Isaac</title><link rel="stylesheet" href="https://cdn.tailwindcss.com"><style>body{padding:2rem;background:white;}</style></head><body><div class="max-w-5xl mx-auto">${content}</div><script>window.print();<\/script></body></html>`);
+      win.document.close();
+    }
+  </script>
+
+</body>
 </html>
