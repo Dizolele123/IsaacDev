@@ -1,548 +1,1492 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="default">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dizolele Isaac - Développeur Fullstack & Designer</title>
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <!-- Personnalisation des couleurs (remplace les defaults de Tailwind) -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#00a884',
-            'primary-dark': '#008f6f',
-            'primary-light': '#e0f5ef',
-            'gray-light': '#f5f7fa',
-            'gray-dark': '#6b7a8a',
-          }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Isaac Rabbi · Portefolio</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+                THÈME PAR DÉFAUT (Bleu nuit / Or / Vert)
+                ============================================================ */
+        :root {
+            --bg-primary: #0F1A2C;
+            --bg-secondary: rgba(255, 255, 255, 0.04);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-input: rgba(255, 255, 255, 0.05);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(15, 26, 44, 0.85);
+            --hero-overlay-1: rgba(212, 175, 55, 0.05);
+            --hero-overlay-2: rgba(27, 138, 74, 0.05);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --badge-bg: rgba(212, 175, 55, 0.12);
+            --color-gold: #D4AF37;
+            --color-green: #1B8A4A;
+            --color-gold-light: #F5E6A3;
+            --color-green-light: #4CAF50;
+            --glow-color: rgba(212, 175, 55, 0.25);
         }
-      }
-    }
-  </script>
-  <style>
-    /* Petits ajustements complémentaires (pas de changement de couleur) */
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    .nav-link.active { color: #00a884; }
-    /* Effet de survol doux pour les cartes */
-    .card-hover:hover { transform: translateY(-4px); transition: 0.3s ease; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1); }
-    /* Barres de compétences animées */
-    .skill-bar { height: 6px; background: #e9edf2; border-radius: 8px; overflow: hidden; }
-    .skill-progress { height: 100%; background: #00a884; border-radius: 8px; width: 0; transition: width 1s ease; }
-    /* Filtres actifs */
-    .filter-btn.active { background: #00a884; color: white; }
-    /* Modal */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; }
-    .modal-content { max-width: 600px; width: 90%; background: white; border-radius: 16px; padding: 2rem; position: relative; }
-  </style>
+
+        /* ============================================================
+                THÈME ALTERNATIF – DESIGN « MARKETING.PNG »
+                (Noir profond / Turquoise / Cyan)
+                ============================================================ */
+        html.alternate {
+            --bg-primary: #0A0D14;
+            --bg-secondary: rgba(0, 212, 255, 0.05);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-input: rgba(0, 212, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --border-color: rgba(0, 212, 255, 0.12);
+            --border-light: rgba(0, 212, 255, 0.18);
+            --nav-bg: rgba(10, 13, 20, 0.92);
+            --hero-overlay-1: rgba(0, 212, 255, 0.08);
+            --hero-overlay-2: rgba(0, 139, 158, 0.08);
+            --shadow-color: rgba(0, 212, 255, 0.08);
+            --badge-bg: rgba(0, 212, 255, 0.12);
+            --color-gold: #00D4FF;
+            --color-green: #008B9E;
+            --color-gold-light: #66E6FF;
+            --color-green-light: #00B4CC;
+            --glow-color: rgba(0, 212, 255, 0.3);
+        }
+
+        /* ============================================================
+                STYLES GLOBAUX
+                ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.6s ease, color 0.6s ease;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gold);
+            border-radius: 4px;
+        }
+
+        /* ===== Navigation ===== */
+        .nav-blur {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.6s ease, border-color 0.6s ease;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 2px;
+            background: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* ===== Hero ===== */
+        .hero-gradient {
+            background:
+                radial-gradient(ellipse at 30% 20%, var(--hero-overlay-1) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, var(--hero-overlay-2) 0%, transparent 50%),
+                var(--bg-primary);
+            transition: background 0.6s ease;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 40px var(--glow-color);
+        }
+
+        /* ===== Couleurs principales ===== */
+        .bg-gold {
+            background: var(--color-gold);
+        }
+        .text-gold {
+            color: var(--color-gold);
+        }
+        .bg-green-accent {
+            background: var(--color-green);
+        }
+        .text-green-accent {
+            color: var(--color-green);
+        }
+        .border-gold {
+            border-color: var(--color-gold);
+        }
+        .border-green-accent {
+            border-color: var(--color-green);
+        }
+        .bg-gold\/10 {
+            background: var(--color-gold) / 0.1;
+        }
+        .bg-gold\/20 {
+            background: var(--color-gold) / 0.2;
+        }
+        .bg-gold\/5 {
+            background: var(--color-gold) / 0.05;
+        }
+
+        /* ===== Boutons ===== */
+        .btn-primary {
+            background: var(--color-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--color-gold);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--border-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Cards ===== */
+        .service-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2rem 1.5rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-gold);
+            box-shadow: 0 20px 60px var(--shadow-color);
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card .icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--badge-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin-bottom: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .icon-wrap {
+            background: var(--color-gold);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        /* ===== Portfolio items ===== */
+        .portfolio-item {
+            position: relative;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.06);
+        }
+        .portfolio-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-primary) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .portfolio-item:hover .overlay {
+            opacity: 1;
+        }
+        .portfolio-item .overlay h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .portfolio-item .overlay p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .portfolio-item .overlay .tag {
+            display: inline-block;
+            background: var(--color-gold);
+            color: var(--bg-primary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 9999px;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+
+        /* ===== Skill bars ===== */
+        .skill-bar-wrap {
+            background: var(--bg-secondary);
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* ===== Timeline ===== */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2.5rem;
+            border-left: 2px solid var(--color-gold);
+        }
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-gold);
+            border: 2px solid var(--bg-primary);
+            box-shadow: 0 0 0 4px var(--glow-color);
+        }
+        .timeline-item .date {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== Contact inputs ===== */
+        .contact-input {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .contact-input:focus {
+            border-color: var(--color-gold);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 4px var(--glow-color);
+        }
+        .contact-input::placeholder {
+            color: var(--text-muted);
+        }
+        .contact-input.textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* ===== Social icons ===== */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        .social-link:hover {
+            background: var(--color-gold);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            border-color: var(--color-gold);
+            box-shadow: 0 8px 24px var(--glow-color);
+        }
+
+        /* ===== Mobile menu ===== */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.5rem 1.5rem 2rem;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        .mobile-menu a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.3s ease;
+        }
+        .mobile-menu a:hover {
+            color: var(--color-gold);
+        }
+
+        /* ===== Badge gold ===== */
+        .badge-gold {
+            background: var(--badge-bg);
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            padding: 0.3rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            display: inline-block;
+        }
+        .badge-green {
+            background: rgba(0, 139, 158, 0.1);
+            border: 1px solid rgba(0, 139, 158, 0.3);
+            color: var(--color-green);
+        }
+        html.alternate .badge-green {
+            background: rgba(0, 139, 158, 0.15);
+            border-color: rgba(0, 139, 158, 0.4);
+            color: var(--color-green-light);
+        }
+
+        /* ===== Section title ===== */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .section-title span {
+            color: var(--color-gold);
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== Fade-up ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-up.delay-1 {
+            transition-delay: 0.1s;
+        }
+        .fade-up.delay-2 {
+            transition-delay: 0.2s;
+        }
+        .fade-up.delay-3 {
+            transition-delay: 0.3s;
+        }
+        .fade-up.delay-4 {
+            transition-delay: 0.4s;
+        }
+        .fade-up.delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        /* ===== Lightbox ===== */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+        }
+        #lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ===== Theme toggle (palette) ===== */
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .theme-toggle:hover {
+            background: var(--color-gold);
+            color: var(--bg-primary);
+            border-color: var(--color-gold);
+            transform: scale(1.05);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            .service-card {
+                padding: 1.5rem 1.25rem;
+            }
+            .portfolio-item {
+                aspect-ratio: 1 / 1;
+            }
+        }
+
+        /* ===== Misc ===== */
+        .typed-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background: var(--color-gold);
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: blink 0.9s step-end infinite;
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="text-xl font-bold">
-          <a href="#home">Dizolele <span class="text-primary">Isaac</span></a>
-        </div>
-        <!-- Menu desktop -->
-        <div class="hidden md:flex space-x-8 text-sm font-medium">
-          <a href="#home" class="hover:text-primary transition">Accueil</a>
-          <a href="#about" class="hover:text-primary transition">À propos</a>
-          <a href="#skills" class="hover:text-primary transition">Compétences</a>
-          <a href="mes_designs.html" class="hover:text-primary transition">Designs</a>
-          <a href="#sites" class="hover:text-primary transition">Sites Web</a>
-          <a href="#contact" class="hover:text-primary transition">Contact</a>
-          <a href="#cv" class="hover:text-primary transition">Mon CV</a>
-        </div>
-        <!-- Burger mobile -->
-        <button id="menu-btn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-      <!-- Menu mobile -->
-      <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2 text-sm font-medium">
-        <a href="#home" class="block hover:text-primary transition">Accueil</a>
-        <a href="#about" class="block hover:text-primary transition">À propos</a>
-        <a href="#skills" class="block hover:text-primary transition">Compétences</a>
-        <a href="mes_designs.html" class="block hover:text-primary transition">Designs</a>
-        <a href="#sites" class="block hover:text-primary transition">Sites Web</a>
-        <a href="#contact" class="block hover:text-primary transition">Contact</a>
-        <a href="#cv" class="block hover:text-primary transition">Mon CV</a>
-      </div>
-    </div>
-  </nav>
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 nav-blur transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 text-xl font-extrabold tracking-tight">
+                    <img src="images/coaching.png" alt="Isaac Rabbi" class="w-8 h-8 rounded-full object-cover border border-gold/30" />
+                    <span class="text-[var(--text-secondary)]">·</span>
+                    <span class="text-[var(--text-secondary)] font-medium text-sm tracking-widest">PORTEFOLIO</span>
+                </a>
 
-  <!-- ===== HERO ===== -->
-  <section id="home" class="pt-20 pb-16 bg-gradient-to-br from-white to-primary-light/30 min-h-screen flex items-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-12">
-        <!-- Texte -->
-        <div class="flex-1 text-center md:text-left">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Bonjour, je suis <span class="text-primary">Dizolele Isaac</span>
-          </h1>
-          <p class="text-xl text-gray-600 mt-2 font-medium">Développeur Fullstack &amp; Designer Créatif</p>
-          <p class="text-gray-500 mt-4 max-w-lg mx-auto md:mx-0">
-            Je crée des expériences digitales exceptionnelles qui marient code et design.
-          </p>
-          <div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
-            <button onclick="window.location.href='mes_designs.html'" class="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary-dark transition transform hover:-translate-y-1">
-              Voir mes Designs
+                <!-- Desktop links -->
+                <div class="hidden md:flex items-center gap-8 text-sm">
+                    <a href="#about" class="nav-link">À propos</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#skills" class="nav-link">Compétences</a>
+                    <a href="#catalog" class="nav-link">Catalogue</a>
+                    <a href="#experience" class="nav-link">Expérience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+
+                <!-- Right: Theme toggle + CTA -->
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Changer la palette">
+                        <i class="fas fa-palette" id="themeIcon"></i>
+                    </button>
+                    <a href="#contact" class="hidden md:inline-block btn-primary text-sm py-2 px-5">
+                        <i class="fas fa-paper-plane"></i> Discutons
+                    </a>
+                    <button id="menuToggle" class="md:hidden text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-2xl focus:outline-none transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+            <a href="#about">À propos</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Compétences</a>
+            <a href="#catalog">Catalogue</a>
+            <a href="#experience">Expérience</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact" class="btn-primary text-center text-sm py-2.5 mt-2">
+                <i class="fas fa-paper-plane"></i> Discutons
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-gradient min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gold/5 blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-green-accent/5 blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <span class="badge-gold">
+                            <i class="fas fa-code mr-1.5"></i> Fullstack · UI/UX
+                        </span>
+                        <span class="badge-gold badge-green">
+                            <i class="fas fa-rocket mr-1.5"></i> Ekolo Tech
+                        </span>
+                    </div>
+
+                    <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-glow">
+                        <span class="text-[var(--text-primary)]">Dizolele Nkounga</span><br />
+                        <span class="text-gold">Isaac Rabbi</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-lg leading-relaxed">
+                        Fullstack Developer · Marketing &amp; Communication · Designer UI/UX · Coach en Anglais
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="#catalog" class="btn-primary">
+                            <i class="fas fa-images"></i> Voir mon travail
+                        </a>
+                        <a href="#contact" class="btn-outline">
+                            <i class="fas fa-phone-alt"></i> Contact
+                        </a>
+                    </div>
+
+                    <!-- stats -->
+                    <div class="flex gap-8 pt-4">
+                        <div>
+                            <div class="text-2xl font-bold text-gold">2+</div>
+                            <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Années d'exp.</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-gold">10+</div>
+                            <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Projets livrés</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-gold">15+</div>
+                            <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Clients satisfaits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right : Avatar / illustration -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                        <div class="absolute inset-0 rounded-full bg-gold/10 blur-2xl"></div>
+                        <div class="relative w-full h-full rounded-full border-2 border-gold/20 overflow-hidden bg-[var(--bg-secondary)]">
+                            <img src="images/monimage.png" alt="Isaac Rabbi" class="w-full h-full object-cover" />
+                            <div class="absolute bottom-4 left-0 right-0 text-center px-4">
+                                <div class="text-sm font-semibold tracking-widest bg-[var(--bg-primary)]/70 backdrop-blur-sm py-1.5 px-4 rounded-full inline-block mx-auto text-[var(--text-primary)] border border-[var(--border-color)]">
+                                    FULLSTACK · UI/UX
+                                </div>
+                                <div class="flex justify-center gap-3 mt-2">
+                                    <span class="w-3 h-3 rounded-full bg-gold"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-accent"></span>
+                                    <span class="w-3 h-3 rounded-full bg-[var(--text-muted)]"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -top-2 -right-2 bg-[var(--bg-primary)]/80 border border-gold/20 rounded-full px-4 py-1.5 text-xs font-semibold text-gold backdrop-blur-sm">
+                            <i class="fas fa-check-circle mr-1.5"></i> Disponible
+                        </div>
+                        <div class="absolute -bottom-2 -left-2 bg-[var(--bg-primary)]/80 border border-green-accent/20 rounded-full px-4 py-1.5 text-xs font-semibold text-green-accent backdrop-blur-sm">
+                            <i class="fas fa-bolt mr-1.5"></i> Passionné
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-16 lg:mt-20">
+                <a href="#about" class="text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors text-sm flex flex-col items-center gap-1 animate-bounce">
+                    <span>Découvrir</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="py-24 bg-[var(--bg-primary)] border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-5 gap-12 items-start">
+                <div class="lg:col-span-2 fade-up">
+                    <span class="section-subtitle">À propos</span>
+                    <h2 class="section-title">
+                        Qui suis-<span>je</span> ?
+                    </h2>
+                    <div class="w-16 h-1 bg-gold rounded-full mt-4 mb-6"></div>
+                    <p class="text-[var(--text-secondary)] leading-relaxed mb-4">
+                        Je suis <strong class="text-[var(--text-primary)]">Dizolele Nkounga Isaac Rabbi</strong>, un développeur Fullstack
+                        passionné par la création de systèmes d'information et de communication innovants.
+                    </p>
+                    <p class="text-[var(--text-secondary)] leading-relaxed mb-4">
+                        En tant que <strong class="text-gold">Responsable Marketing &amp; Communication</strong> au sein de la
+                        startup <strong class="text-[var(--text-primary)]">Ekolo Tech</strong>, je combine une expertise technique avec une
+                        vision stratégique pour bâtir des solutions digitales qui ont un impact réel.
+                    </p>
+                    <p class="text-[var(--text-secondary)] leading-relaxed">
+                        Je suis également <strong class="text-gold">designer UI/UX</strong>, <strong class="text-gold">graphiste</strong>
+                        et <strong class="text-gold">coach en anglais</strong> — une palette de compétences qui me permet
+                        d'aborder chaque projet sous un angle holistique.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span class="badge-gold"><i class="far fa-file-pdf mr-1.5"></i> CV disponible</span>
+                        <span class="badge-gold badge-green">
+                            <i class="fas fa-users mr-1.5"></i> Team player
+                        </span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-6 fade-up delay-1">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="service-card !p-5">
+                            <div class="icon-wrap !w-12 !h-12 !text-base mb-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4 class="font-bold text-[var(--text-primary)] text-sm">Fullstack Dev</h4>
+                            <p class="text-[var(--text-secondary)] text-xs mt-1">HTML, CSS, Javascript, Next.js, PHP, Python</p>
+                        </div>
+                        <div class="service-card !p-5">
+                            <div class="icon-wrap !w-12 !h-12 !text-base mb-3">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h4 class="font-bold text-[var(--text-primary)] text-sm">UI/UX &amp; Graphisme</h4>
+                            <p class="text-[var(--text-secondary)] text-xs mt-1">Figma, Photoshop, Canva</p>
+                        </div>
+                        <div class="service-card !p-5">
+                            <div class="icon-wrap !w-12 !h-12 !text-base mb-3">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h4 class="font-bold text-[var(--text-primary)] text-sm">Marketing &amp; Comm</h4>
+                            <p class="text-[var(--text-secondary)] text-xs mt-1">Stratégie, branding, réseaux</p>
+                        </div>
+                        <div class="service-card !p-5">
+                            <div class="icon-wrap !w-12 !h-12 !text-base mb-3">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h4 class="font-bold text-[var(--text-primary)] text-sm">Coach en Anglais</h4>
+                            <p class="text-[var(--text-secondary)] text-xs mt-1">English courses, community leadership</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-6">
+                        <p class="text-[var(--text-secondary)] italic text-sm leading-relaxed">
+                            <i class="fas fa-quote-left text-gold/40 mr-2"></i>
+                            La technologie est un outil, mais c'est l'humain qui crée la différence.
+                            Je construis des ponts entre le code, le design et la stratégie.
+                        </p>
+                        <div class="flex items-center gap-3 mt-3">
+                            <img src="images/monimage.png" alt="Isaac Rabbi" class="w-8 h-8 rounded-full object-cover border border-gold/30" />
+                            <div>
+                                <div class="text-xs font-semibold text-[var(--text-primary)]">Isaac Rabbi</div>
+                                <div class="text-[10px] text-[var(--text-muted)]">Fullstack · Marketing · Design</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" class="py-24 border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <span class="section-subtitle">Ce que je fais</span>
+                <h2 class="section-title">
+                    Mes <span>services</span>
+                </h2>
+                <p class="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
+                    Des solutions complètes pour transformer vos idées en réalité digitale.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1 -->
+                <div class="service-card fade-up delay-1">
+                    <div class="icon-wrap"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Développement Fullstack</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Conception et développement d'applications web robustes, du backend au frontend, avec les technologies modernes.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Laravel</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">React</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="service-card fade-up delay-2">
+                    <div class="icon-wrap"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">UI/UX &amp; Design Graphique</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Création d'interfaces intuitives et de supports visuels percutants pour une expérience utilisateur mémorable.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Figma</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Photoshop</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Illustrator</span>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="service-card fade-up delay-3">
+                    <div class="icon-wrap"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Marketing &amp; Communication</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Stratégies digitales, branding, gestion des réseaux sociaux et campagnes de communication sur mesure.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Stratégie</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Branding</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Social Media</span>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="service-card fade-up delay-2">
+                    <div class="icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Coaching en Anglais</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Accompagnement personnalisé pour maîtriser l'anglais, se lancer dans le leadership et gagner en confiance.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Business</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Orientation</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Leadership</span>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="service-card fade-up delay-3">
+                    <div class="icon-wrap"><i class="fas fa-database"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Systèmes d'Information</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Conception et mise en place de systèmes d'information et de communication pour optimiser les processus.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">SI</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">PGI</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">GRC</span>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="service-card fade-up delay-4">
+                    <div class="icon-wrap"><i class="fas fa-rocket"></i></div>
+                    <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">Accompagnement Startup</h3>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Conseils et support pour les jeunes entreprises : stratégie digitale, MVP, branding et levée de fonds.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">MVP</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Lean</span>
+                        <span class="text-[10px] bg-[var(--bg-secondary)] px-3 py-1 rounded-full text-[var(--text-muted)]">Growth</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-up">
+                    <span class="section-subtitle">Compétences</span>
+                    <h2 class="section-title">
+                        Mon <span>expertise</span> technique
+                    </h2>
+                    <div class="w-16 h-1 bg-gold rounded-full mt-4 mb-6"></div>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Chaque compétence est le fruit d'une pratique quotidienne et d'une veille technologique constante.
+                        Voici les domaines où j'excelle.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 mt-6">
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 text-center">
+                            <div class="text-gold text-2xl font-bold">65%</div>
+                            <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider mt-1">Développement</div>
+                        </div>
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 text-center">
+                            <div class="text-gold text-2xl font-bold">50%</div>
+                            <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider mt-1">UI/UX Design</div>
+                        </div>
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 text-center">
+                            <div class="text-gold text-2xl font-bold">70%</div>
+                            <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider mt-1">Marketing</div>
+                        </div>
+                        <div class="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 text-center">
+                            <div class="text-gold text-2xl font-bold">65%</div>
+                            <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider mt-1">Coaching</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-5 fade-up delay-1">
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">Fullstack (PHP, Javascript, Next.js, Python)</span>
+                            <span class="text-gold font-semibold">65%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">UI/UX Design (Figma, Canva)</span>
+                            <span class="text-gold font-semibold">50%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">Graphisme (Canva)</span>
+                            <span class="text-gold font-semibold">50%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">Marketing Digital &amp; Communication</span>
+                            <span class="text-gold font-semibold">60%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">Coaching en Anglais (Business, IELTS)</span>
+                            <span class="text-gold font-semibold">70%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium text-[var(--text-primary)]">Systèmes d'Information (PGI, GRC)</span>
+                            <span class="text-gold font-semibold">65%</span>
+                        </div>
+                        <div class="skill-bar-wrap">
+                            <div class="skill-bar-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATALOG ===== -->
+    <section id="catalog" class="py-24 border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <span class="section-subtitle">Réalisations</span>
+                <h2 class="section-title">
+                    Mon <span>catalogue</span>
+                </h2>
+                <p class="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
+                    Une sélection de projets qui reflètent mon savoir-faire et ma polyvalence.
+                    <span class="block text-[var(--text-muted)] text-xs mt-1">(Cliquez sur une image pour l'agrandir)</span>
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="portfolio-item fade-up delay-1" onclick="openModal(this)">
+                    <img src="images/appdesktop.png" alt="Projet Fullstack" />
+                    <div class="overlay">
+                        <h4>Application desktop</h4>
+                        <p>Javascript + Python · systeme de gestion</p>
+                        <span class="tag">Fullstack</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-up delay-2" onclick="openModal(this)">
+                    <img src="images/appmobile.png" alt="UI/UX Design" />
+                    <div class="overlay">
+                        <h4>Refonte UI/UX</h4>
+                        <p>Figma · Prototype interface</p>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-up delay-3" onclick="openModal(this)">
+                    <img src="images/designUI.png" alt="Branding" />
+                    <div class="overlay">
+                        <h4>Identité Visuelle</h4>
+                        <p>CANVA · Affiche Application</p>
+                        <span class="tag">Graphisme</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-up delay-2" onclick="openModal(this)">
+                    <img src="images/appgestion.png" alt="Site Web" />
+                    <div class="overlay">
+                        <h4>Site Web Institutionnel</h4>
+                        <p>Next.js + Python · Plateforme Centres</p>
+                        <span class="tag">Web</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-up delay-3" onclick="openModal(this)">
+                    <img src="images/marketing.png" alt="Campagne Marketing" />
+                    <div class="overlay">
+                        <h4>Campagne Digitale</h4>
+                        <p>Stratégie  · Création . Affiche</p>
+                        <span class="tag">Marketing</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-up delay-4" onclick="openModal(this)">
+                    <img src="images/coaching.png" alt="Coaching English" />
+                    <div class="overlay">
+                        <h4>Programme de Coaching</h4>
+                        <p>English Leadership· Modules interactifs</p>
+                        <span class="tag">Coaching</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10 fade-up">
+                <a href="#contact" class="btn-outline text-sm">
+                    <i class="fas fa-plus-circle"></i> Discutons de votre projet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="fade-up">
+                    <span class="section-subtitle">Parcours</span>
+                    <h2 class="section-title">
+                        Mon <span>expérience</span>
+                    </h2>
+                    <div class="w-16 h-1 bg-gold rounded-full mt-4 mb-6"></div>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+                        Un cheminement riche en apprentissages, où chaque étape a renforcé ma polyvalence.
+                    </p>
+                </div>
+
+                <div class="space-y-0 fade-up delay-1">
+                    <div class="timeline-item">
+                        <div class="date">2025 — Présent</div>
+                        <h4 class="text-[var(--text-primary)] font-bold text-lg mt-0.5">Responsable Marketing &amp; Communication</h4>
+                        <p class="text-[var(--text-secondary)] text-sm">Ekolo Tech · Brazzaville</p>
+                        <ul class="text-[var(--text-muted)] text-xs mt-2 space-y-1 list-disc list-inside">
+                            <li>Stratégie de communication et marketing digital</li>
+                            <li>Gestion de la marque et identité visuelle</li>
+                            <li>Développement de partenariats stratégiques</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="date">2025 — Présent</div>
+                        <h4 class="text-[var(--text-primary)] font-bold text-lg mt-0.5">Développeur Fullstack Freelance</h4>
+                        <p class="text-[var(--text-secondary)] text-sm">Indépendant · Remote</p>
+                        <ul class="text-[var(--text-muted)] text-xs mt-2 space-y-1 list-disc list-inside">
+                            <li>Conception de sites web et applications sur mesure</li>
+                            <li>UI/UX Design et intégration</li>
+                            <li>Maintenance et optimisation</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="date">2022 — Présent</div>
+                        <h4 class="text-[var(--text-primary)] font-bold text-lg mt-0.5">Designer UI/UX &amp; Graphiste</h4>
+                        <p class="text-[var(--text-secondary)] text-sm">Freelance · Brazzaville</p>
+                        <ul class="text-[var(--text-muted)] text-xs mt-2 space-y-1 list-disc list-inside">
+                            <li>Création d'interfaces et prototypes</li>
+                            <li>Charte graphique et identité de marque</li>
+                            <li>Campagnes print et digitales</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="date">2020 — 2022</div>
+                        <h4 class="text-[var(--text-primary)] font-bold text-lg mt-0.5">Coach en Anglais</h4>
+                        <p class="text-[var(--text-secondary)] text-sm">NECA · Dolisie</p>
+                        <ul class="text-[var(--text-muted)] text-xs mt-2 space-y-1 list-disc list-inside">
+                            <li>Préparation des cours</li>
+                            <li>Secretaire chargé de communication</li>
+                            <li>Suivi personnalisé des étudiants</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="py-24 border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <span class="section-subtitle">Témoignages</span>
+                <h2 class="section-title">
+                    Ce qu'ils disent de <span>moi</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-6 fade-up delay-1">
+                    <div class="flex text-gold text-sm mb-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-secondary)] text-sm italic leading-relaxed">
+                        "Isaac a su transformer notre vision en un produit digital remarquable. Son expertise technique et sa créativité ont fait la différence."
+                    </p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <img src="images/melfort.png" alt="Botondi J." class="w-10 h-10 rounded-full object-cover border border-gold/30" />
+                        <div>
+                            <div class="text-sm font-semibold text-[var(--text-primary)]">Mongo Melfort.</div>
+                            <div class="text-[10px] text-[var(--text-muted)]">Membre, Ekolo Tech</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-6 fade-up delay-2">
+                    <div class="flex text-gold text-sm mb-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-secondary)] text-sm italic leading-relaxed">
+                        "Grâce à Isaac, notre communication a pris une nouvelle dimension. Il est à l'écoute, créatif et toujours force de proposition."
+                    </p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <img src="images/mhan.png" alt="Basseva Mhan." class="w-10 h-10 rounded-full object-cover border border-gold/30" />
+                        <div>
+                            <div class="text-sm font-semibold text-[var(--text-primary)]">Basseva Mhan.</div>
+                            <div class="text-[10px] text-[var(--text-muted)]">Responsable NK.M Batiment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-6 fade-up delay-3">
+                    <div class="flex text-gold text-sm mb-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-secondary)] text-sm italic leading-relaxed">
+                        "Son coaching en anglais m'a permis de gagner en confiance et de devenir moi aussi coach. Un accompagnement sur mesure."
+                    </p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <img src="images/auguste.png" alt="Augustadry M." class="w-10 h-10 rounded-full object-cover border border-gold/30" />
+                        <div>
+                            <div class="text-sm font-semibold text-[var(--text-primary)]">Augustadry M.</div>
+                            <div class="text-[10px] text-[var(--text-muted)]">Responsable Amazing Center</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border-color)] transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="fade-up">
+                    <span class="section-subtitle">Contact</span>
+                    <h2 class="section-title">
+                        Parlons de votre <span>projet</span>
+                    </h2>
+                    <div class="w-16 h-1 bg-gold rounded-full mt-4 mb-6"></div>
+                    <p class="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
+                        Que vous ayez une idée de projet, un besoin en développement, en design, en marketing ou en coaching,
+                        je suis à votre écoute. N'hésitez pas à me contacter.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider">Téléphone</div>
+                                <a href="tel:+237699999999" class="text-[var(--text-primary)] hover:text-gold transition-colors">+242 06 490 59 08</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider">Email</div>
+                                <a href="mailto:isaac@ekolotech.com" class="text-[var(--text-primary)] hover:text-gold transition-colors">isaacdizolelenkounga@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="text-[var(--text-muted)] text-xs uppercase tracking-wider">Localisation</div>
+                                <span class="text-[var(--text-primary)]">Brazzaville, R.Congo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 mt-6">
+                        <a href="https://www.linkedin.com/in/isaac-rabbi-dizolele-nkounga-9716073a3" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/Dizolele123" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://vm.tiktok.com/ZS968MqFsGrra-NVTLJ/" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="fade-up delay-1">
+                    <form id="contactForm" action="https://formspree.io/f/mwvdpnjq" method="POST" class="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 md:p-8 space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Nom &amp; prénom</label>
+                                <input type="text" name="name" class="contact-input" placeholder="Votre nom" required />
+                            </div>
+                            <div>
+                                <label class="text-xs text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Email</label>
+                                <input type="email" name="email" class="contact-input" placeholder="votre@email.com" required />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Sujet</label>
+                            <input type="text" name="subject" class="contact-input" placeholder="Objet de votre message" />
+                        </div>
+                        <div>
+                            <label class="text-xs text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Message</label>
+                            <textarea name="message" class="contact-input textarea" placeholder="Décrivez votre projet ou votre besoin..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full justify-center text-sm">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                        <p class="text-center text-[10px] text-[var(--text-muted)]">Je vous répondrai dans les 24h</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-[var(--border-color)] py-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2 text-sm">
+                    <img src="images/coaching.png" alt="Isaac Rabbi" class="w-6 h-6 rounded-full object-cover border border-gold/30" />
+                    <span class="text-[var(--text-muted)]">·</span>
+                    <span class="text-[var(--text-muted)] text-xs">Dizolele Nkounga Isaac Rabbi</span>
+                </div>
+                <div class="flex items-center gap-6 text-xs text-[var(--text-muted)]">
+                    <a href="#" class="hover:text-gold transition-colors">Mentions légales</a>
+                    <a href="#" class="hover:text-gold transition-colors">Politique de confidentialité</a>
+                    <span>© 2026 · Tous droits réservés</span>
+                </div>
+                <div class="text-xs text-[var(--text-muted)]">
+                    <i class="fas fa-code text-gold/40 mr-1"></i> conçu avec <i class="fas fa-heart text-gold/40 mx-1"></i> par Isaac
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div id="lightbox" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4" onclick="closeModal()">
+        <div class="max-w-4xl w-full relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute -top-12 right-0 text-white/50 hover:text-white text-2xl transition-colors">
+                <i class="fas fa-times-circle"></i>
             </button>
-            <button onclick="document.getElementById('sites').scrollIntoView({behavior:'smooth'})" class="border-2 border-primary text-primary px-8 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition transform hover:-translate-y-1">
-              Mes Projets Web
-            </button>
-          </div>
+            <img id="lightboxImg" src="" alt="Aperçu" class="w-full rounded-2xl shadow-2xl border border-white/10" />
+            <div id="lightboxCaption" class="mt-4 text-white/60 text-sm text-center"></div>
         </div>
-        <!-- Image -->
-        <div class="flex-shrink-0">
-          <div class="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl relative">
-            <img src="a1.jpg" alt="Dizolele Isaac" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-transparent pointer-events-none"></div>
-          </div>
-        </div>
-      </div>
-      <!-- Scroll indicator -->
-      <div class="flex flex-col items-center mt-12 text-gray-400 text-sm animate-bounce">
-        <span>Scroll</span>
-        <div class="w-5 h-5 border-r-2 border-b-2 border-gray-400 rotate-45 mt-1"></div>
-      </div>
     </div>
-  </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">À Propos de Moi</h2>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <div class="mt-12 max-w-4xl mx-auto text-center">
-        <p class="text-gray-600 text-lg leading-relaxed">
-          Passionné par le développement web et le design, je crée des solutions digitales qui allient performance technique et esthétique raffinée.
-        </p>
-        <p class="text-gray-600 text-lg leading-relaxed mt-4">
-          Avec une expertise en développement fullstack et un œil pour le design, je transforme vos idées en réalités digitales exceptionnelles à travers l'automatisation de vos opérations en entreprise par la mise en place de systèmes informatiques de gestion et d'applications pour votre identité visuelle.
-        </p>
-        <div class="flex flex-wrap justify-center gap-12 mt-10">
-          <div><span class="text-3xl font-bold text-primary">10+</span><p class="text-gray-500">Projets Réalisés</p></div>
-          <div><span class="text-3xl font-bold text-primary">3</span><p class="text-gray-500">Années d'Expérience</p></div>
-          <div><span class="text-3xl font-bold text-primary">100%</span><p class="text-gray-500">Clients Satisfaits</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // --- Palette toggle ---
+        const htmlEl = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
 
-  <!-- ===== SKILLS ===== -->
-  <section id="skills" class="py-20 bg-gray-light">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mes Compétences</h2>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Frontend -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
-          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-laptop-code text-primary"></i> Frontend</h3>
-          <div class="mt-4 space-y-4">
-            <div><div class="flex justify-between"><span>HTML/CSS</span><span class="text-sm text-gray-500">90%</span></div><div class="skill-bar"><div class="skill-progress" data-level="90"></div></div></div>
-            <div><div class="flex justify-between"><span>JavaScript</span><span class="text-sm text-gray-500">85%</span></div><div class="skill-bar"><div class="skill-progress" data-level="85"></div></div></div>
-            <div><div class="flex justify-between"><span>Figma</span><span class="text-sm text-gray-500">80%</span></div><div class="skill-bar"><div class="skill-progress" data-level="80"></div></div></div>
-          </div>
-        </div>
-        <!-- Backend -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
-          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-server text-primary"></i> Backend</h3>
-          <div class="mt-4 space-y-4">
-            <div><div class="flex justify-between"><span>PHP</span><span class="text-sm text-gray-500">75%</span></div><div class="skill-bar"><div class="skill-progress" data-level="75"></div></div></div>
-            <div><div class="flex justify-between"><span>JavaScript</span><span class="text-sm text-gray-500">70%</span></div><div class="skill-bar"><div class="skill-progress" data-level="70"></div></div></div>
-            <div><div class="flex justify-between"><span>Base de données</span><span class="text-sm text-gray-500">65%</span></div><div class="skill-bar"><div class="skill-progress" data-level="65"></div></div></div>
-          </div>
-        </div>
-        <!-- Design -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
-          <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-pencil-ruler text-primary"></i> Design</h3>
-          <div class="mt-4 space-y-4">
-            <div><div class="flex justify-between"><span>Adobe Photoshop</span><span class="text-sm text-gray-500">85%</span></div><div class="skill-bar"><div class="skill-progress" data-level="85"></div></div></div>
-            <div><div class="flex justify-between"><span>Canva</span><span class="text-sm text-gray-500">80%</span></div><div class="skill-bar"><div class="skill-progress" data-level="80"></div></div></div>
-            <div><div class="flex justify-between"><span>Figma</span><span class="text-sm text-gray-500">75%</span></div><div class="skill-bar"><div class="skill-progress" data-level="75"></div></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DESIGNS ===== -->
-  <section id="designs" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mon Catalogue de Designs</h2>
-      <p class="text-center text-gray-500 mt-2">Découvrez mes créations graphiques et designs d'interface</p>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <!-- Filtres -->
-      <div class="flex flex-wrap justify-center gap-3 mt-10">
-        <button class="filter-btn active px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="all">Tous</button>
-        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="ui">UI/UX</button>
-        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="graphic">Graphique</button>
-        <button class="filter-btn px-6 py-2 rounded-full border border-gray-200 font-medium hover:bg-primary hover:text-white transition" data-filter="branding">Branding</button>
-      </div>
-      <!-- Grille -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="ui">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a4.png" alt="Design UI/UX 1" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
-              <button onclick="openModal('design1')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Application de gestion centre</h3>
-            <p class="text-sm text-gray-500">PHP - HTML5/CSS3</p>
-          </div>
-        </div>
-        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="graphic">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a2.png" alt="Design Graphique 1" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
-              <button onclick="openModal('design2')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Identité Visuelle restaurant</h3>
-            <p class="text-sm text-gray-500">en cours...</p>
-          </div>
-        </div>
-        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="branding">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a3.png" alt="Branding 1" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
-              <button onclick="openModal('design3')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Site Institut 2i</h3>
-            <p class="text-sm text-gray-500">en cours...</p>
-          </div>
-        </div>
-        <div class="design-card bg-white rounded-xl shadow-sm overflow-hidden card-hover" data-category="ui">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a5.jpg" alt="Design UI/UX 2" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center">
-              <button onclick="openModal('design4')" class="bg-white text-gray-800 px-5 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir plus</button>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Logo Pro</h3>
-            <p class="text-sm text-gray-500">Design Graphique</p>
-          </div>
-        </div>
-      </div>
-      <!-- CTA -->
-      <div class="mt-12 text-center bg-primary-light rounded-2xl p-8">
-        <h3 class="text-xl font-semibold">Intéressé par un design personnalisé ?</h3>
-        <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="mt-4 bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary-dark transition">
-          Commander un Design
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SITES WEB ===== -->
-  <section id="sites" class="py-20 bg-gray-light">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mes Projets Web</h2>
-      <p class="text-center text-gray-500 mt-2">Découvrez mes réalisations de sites web et applications</p>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a2.png" alt="Projet Web 1" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
-              <a href="https://dizolele123.github.io/Le-Bon-Coin-de-chez-Nous/" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
-              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Site Restaurant</h3>
-            <p class="text-sm text-gray-500">Gestion commande en ligne</p>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">PHP</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS3</span>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a3.png" alt="Projet Web 2" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
-              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
-              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Site Institut 2i</h3>
-            <p class="text-sm text-gray-500">Identité visuelle + inscription en ligne</p>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">PHP</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS3</span>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
-          <div class="relative overflow-hidden aspect-video">
-            <img src="a4.png" alt="Projet Web 3" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-4">
-              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Voir</a>
-              <a href="#" class="bg-white text-gray-800 px-4 py-2 rounded-full font-semibold hover:bg-primary hover:text-white transition">Détails</a>
-            </div>
-          </div>
-          <div class="p-4">
-            <h3 class="font-semibold">Application Desktop</h3>
-            <p class="text-sm text-gray-500">Application de gestion centre</p>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">HTML5</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">CSS</span>
-              <span class="text-xs bg-primary-light text-primary-dark px-3 py-1 rounded-full">JavaScript</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">Contactez-moi</h2>
-      <p class="text-center text-gray-500 mt-2">Discutons de votre prochain projet</p>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Infos -->
-        <div class="space-y-6">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-envelope"></i></div>
-            <div><h3 class="font-semibold">Email</h3><p class="text-gray-500">isaacdizolelenkounga@gmail.com</p></div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-phone"></i></div>
-            <div><h3 class="font-semibold">Téléphone</h3><p class="text-gray-500">+242 06 490 59 08</p></div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary text-xl"><i class="fas fa-map-marker-alt"></i></div>
-            <div><h3 class="font-semibold">Localisation</h3><p class="text-gray-500">Brazzaville, Mfilou</p></div>
-          </div>
-        </div>
-        <!-- Formulaire -->
-        <div class="bg-gray-light p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold mb-4">Message Général</h3>
-          <form method="POST" action="https://formspree.io/f/xqaloyyw">
-            <div class="space-y-4">
-              <input type="text" name="name" placeholder="Votre Nom" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
-              <input type="email" name="email" placeholder="Votre Email" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
-              <input type="tel" name="phone" placeholder="Téléphone" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition" />
-              <select name="service" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition">
-                <option value="">Type de Service</option>
-                <option value="developpement">Développement Web</option>
-                <option value="design">Design</option>
-                <option value="consultation">Consultation</option>
-              </select>
-              <textarea name="message" rows="4" placeholder="Votre Message" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"></textarea>
-              <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition">Envoyer le Message</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CV ===== -->
-  <section id="cv" class="py-20 bg-gray-light">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center">Mon Curriculum Vitae</h2>
-      <p class="text-center text-gray-500 mt-2">Téléchargez mon CV complet ou consultez-le en ligne</p>
-      <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
-      <div class="flex flex-wrap justify-center gap-4 mt-8">
-        <button onclick="downloadCV()" class="bg-primary text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-primary-dark transition flex items-center gap-2"><i class="fas fa-download"></i> Télécharger le CV (PDF)</button>
-        <button onclick="printCV()" class="border-2 border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition flex items-center gap-2"><i class="fas fa-print"></i> Imprimer le CV</button>
-      </div>
-      <div class="mt-10 bg-white rounded-2xl shadow-sm p-6 md:p-10" id="cv-content">
-        <!-- En-tête -->
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 pb-6 border-b border-gray-200">
-          <img src="a11.jpg" alt="Photo" class="w-32 h-32 rounded-full object-cover border-4 border-primary-light" />
-          <div class="flex-1 text-center md:text-left">
-            <h1 class="text-2xl font-bold">Dizolele Nkounga Isaac Rabbi</h1>
-            <h2 class="text-lg text-gray-600">Développeur Fullstack &amp; Designer graphique</h2>
-            <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-2 text-sm text-gray-500">
-              <span><i class="fas fa-envelope text-primary mr-1"></i> isaacdizolelenkounga@gmail.com</span>
-              <span><i class="fas fa-phone text-primary mr-1"></i> +242 06 490 59 08</span>
-              <span><i class="fas fa-map-marker-alt text-primary mr-1"></i> Brazzaville / Mfilou</span>
-              <span><i class="fas fa-globe text-primary mr-1"></i> www.dizolele123.com</span>
-            </div>
-          </div>
-        </div>
-        <!-- Corps -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          <!-- Colonne gauche (2/3) -->
-          <div class="md:col-span-2 space-y-6">
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-briefcase text-primary"></i> Expérience Professionnelle</h3>
-              <div class="space-y-4 mt-3">
-                <div><span class="font-bold text-primary">2022 - Présent</span><h4 class="font-semibold">Développeur Fullstack</h4><p class="text-sm text-gray-500">Tech Solutions Inc.</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Développement d'applications web/Desktop avec PHP et JavaScript</li><li>Conception et optimisation de bases de données</li><li>Encadrement d'une équipe de 3 développeurs</li><li>Encadreur en programmation Web au centre EducationPlus</li><li>Amélioration des performances de 60%</li><li>Responsable de la Direction Marketing du centre NKM-Bâtiment</li></ul></div>
-                <div><span class="font-bold text-primary">2020 - 2022</span><h4 class="font-semibold">Designer Graphique</h4><p class="text-sm text-gray-500">Agence Digital Sabrina</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Conception d'interfaces utilisateur modernes</li><li>Création des maquettes publicitaires</li><li>Création de flyers, affiches, ...</li><li>Design moderne professionnel</li></ul></div>
-                <div><span class="font-bold text-primary">2019 - 2020</span><h4 class="font-semibold">Coach Anglais</h4><p class="text-sm text-gray-500">NECA</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1"><li>Secrétaire chargé de communication</li><li>Encadreur en langue anglaise</li><li>Leader communautaire</li><li>Organisateur d'événements communautaires</li></ul></div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-graduation-cap text-primary"></i> Formation</h3>
-              <div class="space-y-2 mt-3">
-                <div><span class="font-bold text-primary">2022 - présent</span><h4 class="font-semibold">Licence en Développement Web</h4><p class="text-sm text-gray-500">CFI-CIRAS</p></div>
-                <div><span class="font-bold text-primary">2022 - 2023</span><h4 class="font-semibold">Formation en Design Pro</h4><p class="text-sm text-gray-500">Ministère de la Jeunesse</p></div>
-              </div>
-            </div>
-          </div>
-          <!-- Colonne droite (1/3) -->
-          <div class="space-y-6">
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-code text-primary"></i> Compétences Techniques</h3>
-              <div class="mt-2 space-y-3">
-                <div><h4 class="font-medium">Frontend</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">JavaScript</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">HTML5/CSS3</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span></div></div>
-                <div><h4 class="font-medium">Backend</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Python (en cours)</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">PHP</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">MySQL</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">JavaScript</span></div></div>
-                <div><h4 class="font-medium">Design</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Canva</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Photoshop</span></div></div>
-                <div><h4 class="font-medium">Outils & Méthodologies</h4><div class="flex flex-wrap gap-1"><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Visual Studio</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Sublime Text</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Canva</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Figma</span><span class="text-xs bg-primary-light text-primary-dark px-2 py-1 rounded">Photoshop</span></div></div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-language text-primary"></i> Langues</h3>
-              <div class="space-y-2 mt-2">
-                <div><span class="font-medium">Français</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span></div></div>
-                <div><span class="font-medium">Anglais</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span></div></div>
-                <div><span class="font-medium">Kituba</span><div class="flex gap-1"><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-primary rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span><span class="w-4 h-4 bg-gray-200 rounded-full"></span></div></div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-award text-primary"></i> Certifications</h3>
-              <div class="mt-2 space-y-1 text-sm">
-                <div><span class="font-medium">Leadership Communautaire</span> - YALI RLC 2022</div>
-                <div><span class="font-medium">Coach Anglais</span> - NECA 2021</div>
-                <div><span class="font-medium">Graphique Designer</span> - Ministère Jeunesse 2023</div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fas fa-heart text-primary"></i> Centres d'intérêt</h3>
-              <div class="flex flex-wrap gap-2 mt-2">
-                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-paint-brush text-primary mr-1"></i> Design Graphique</span>
-                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-music text-primary mr-1"></i> Musique Électronique</span>
-                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-plane text-primary mr-1"></i> Voyages</span>
-                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-gamepad text-primary mr-1"></i> Jeux Vidéo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="bg-gray-800 text-white py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p>&copy; 2025 Dizolele Isaac. Tous droits réservés.</p>
-      <div class="flex gap-4 text-lg">
-        <a href="#" class="hover:text-primary transition"><i class="fab fa-linkedin"></i></a>
-        <a href="#" class="hover:text-primary transition"><i class="fab fa-github"></i></a>
-        <a href="#" class="hover:text-primary transition"><i class="fab fa-dribbble"></i></a>
-        <a href="#" class="hover:text-primary transition"><i class="fab fa-behance"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== MODAL ===== -->
-  <div id="designModal" class="modal">
-    <div class="modal-content">
-      <button onclick="closeModal()" class="absolute top-3 right-4 text-3xl text-gray-400 hover:text-gray-800">&times;</button>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <!-- ===== SCRIPTS ===== -->
-  <script>
-    // Menu mobile
-    document.getElementById('menu-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
-    // Filtres designs
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const designCards = document.querySelectorAll('.design-card');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.dataset.filter;
-        designCards.forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
-        });
-      });
-    });
-    // Activer "Tous" par défaut
-    document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
-
-    // Animation barres de compétences (Intersection Observer)
-    const progressBars = document.querySelectorAll('.skill-progress');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const bar = entry.target;
-          const level = bar.dataset.level;
-          setTimeout(() => { bar.style.width = level + '%'; }, 200);
+        let currentPalette = localStorage.getItem('palette') || 'default';
+        if (currentPalette === 'alternate') {
+            htmlEl.classList.remove('default');
+            htmlEl.classList.add('alternate');
+            themeIcon.className = 'fas fa-magic';
+        } else {
+            htmlEl.classList.add('default');
+            htmlEl.classList.remove('alternate');
+            themeIcon.className = 'fas fa-palette';
         }
-      });
-    }, { threshold: 0.5 });
-    progressBars.forEach(bar => observer.observe(bar));
 
-    // Modal
-    function openModal(id) {
-      const modal = document.getElementById('designModal');
-      const body = document.getElementById('modal-body');
-      const content = {
-        design1: `<h2 class="text-2xl font-bold">Affiche Moderne Pro</h2><img src="a8.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> UI/UX Design</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Design d'affiche moderne et professionnel.</p><p><strong>Outils:</strong> Photoshop</p>`,
-        design2: `<h2 class="text-2xl font-bold">Flyer Publicitaire</h2><img src="a9.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> Design Graphique</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Flyer de haute qualité pour publicités.</p><p><strong>Outils:</strong> Canva</p>`,
-        design3: `<h2 class="text-2xl font-bold">Identité Visuelle</h2><img src="a10.jpg" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> Branding</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Création complète d'identité visuelle.</p><p><strong>Outils:</strong> Photoshop</p>`,
-        design4: `<h2 class="text-2xl font-bold">Dashboard Analytics</h2><img src="a7.png" class="w-full rounded-lg my-3" /><p><strong>Catégorie:</strong> UI/UX Design</p><p><strong>Année:</strong> 2024</p><p><strong>Description:</strong> Dashboard analytique avec visualisation de données.</p><p><strong>Outils:</strong> Figma</p>`
-      };
-      body.innerHTML = content[id] || '<p>Contenu non disponible</p>';
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      document.getElementById('designModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-    window.addEventListener('click', e => { if (e.target === document.getElementById('designModal')) closeModal(); });
+        themeToggle.addEventListener('click', () => {
+            if (htmlEl.classList.contains('alternate')) {
+                htmlEl.classList.remove('alternate');
+                htmlEl.classList.add('default');
+                localStorage.setItem('palette', 'default');
+                themeIcon.className = 'fas fa-palette';
+            } else {
+                htmlEl.classList.remove('default');
+                htmlEl.classList.add('alternate');
+                localStorage.setItem('palette', 'alternate');
+                themeIcon.className = 'fas fa-magic';
+            }
+        });
 
-    // Téléchargement CV (simulé)
-    function downloadCV() {
-      alert('Téléchargement du CV en cours...');
-      setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = 'https://cvdesignr.com/p/690a8a806392c';
-        a.download = 'CV_Dizolele_Isaac.pdf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 500);
-    }
+        // --- Mobile menu ---
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
 
-    // Impression CV
-    function printCV() {
-      const content = document.getElementById('cv-content').innerHTML;
-      const win = window.open('', '_blank');
-      win.document.write(`<!DOCTYPE html><html><head><title>CV Dizolele Isaac</title><link rel="stylesheet" href="https://cdn.tailwindcss.com"><style>body{padding:2rem;background:white;}</style></head><body><div class="max-w-5xl mx-auto">${content}</div><script>window.print();<\/script></body></html>`);
-      win.document.close();
-    }
-  </script>
+        menuToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            menuToggle.innerHTML = menuOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // --- Navbar active link ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        });
+
+        // --- Fade-up on scroll ---
+        const fadeEls = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        fadeEls.forEach(el => observer.observe(el));
+
+        // --- Lightbox ---
+        function openModal(el) {
+            const img = el.querySelector('img');
+            const caption = el.querySelector('.overlay h4');
+            const modal = document.getElementById('lightbox');
+            const modalImg = document.getElementById('lightboxImg');
+            const modalCaption = document.getElementById('lightboxCaption');
+            if (img) {
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+            }
+            if (caption) {
+                modalCaption.textContent = caption.textContent + ' · ' + (el.querySelector('.overlay p')?.textContent || '');
+            }
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('lightbox');
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // --- Contact form with Formspree ---
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('button[type="submit"]');
+            const original = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Message envoyé !';
+                    btn.style.background = 'var(--color-green)';
+                    btn.style.borderColor = 'var(--color-green)';
+                    this.reset();
+                    setTimeout(() => {
+                        btn.innerHTML = original;
+                        btn.style.background = '';
+                        btn.style.borderColor = '';
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Erreur lors de l\'envoi.');
+                }
+            } catch (error) {
+                btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Erreur, réessayez';
+                btn.style.background = '#d32f2f';
+                btn.style.borderColor = '#d32f2f';
+                console.error('Formspree error:', error);
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.style.background = '';
+                    btn.style.borderColor = '';
+                    btn.disabled = false;
+                }, 4000);
+            }
+        });
+
+        // --- Skill bars animation ---
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 120);
+                }
+            });
+        }, { threshold: 0.3 });
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        console.log('🚀 Portfolio Isaac Rabbi — deux designs complets !');
+    </script>
 
 </body>
 </html>
